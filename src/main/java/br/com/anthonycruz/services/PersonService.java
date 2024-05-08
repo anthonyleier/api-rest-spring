@@ -24,14 +24,27 @@ public class PersonService {
 		person.setGender("Male");
 		return person;
 	}
-	
+
 	public List<Person> findAll() {
 		List<Person> persons = new ArrayList<>();
-		for (int i=0; i< 8;i++) {
+		for (int i = 0; i < 8; i++) {
 			Person person = mockPerson(i);
 			persons.add(person);
 		}
-		return persons ;
+		return persons;
+	}
+
+	public Person create(Person person) {
+		logger.info("Creating person");
+		return person;
+	}
+	
+	public Person update(Person person) {
+		logger.info("Updating person");
+		return person;
+	}
+	public void delete(String id) {
+		logger.info("Deleting person");
 	}
 
 	private Person mockPerson(int i) {
