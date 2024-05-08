@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "person") // Colocar nome da tabela caso seja diferente
+@Table(name = "person")
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
