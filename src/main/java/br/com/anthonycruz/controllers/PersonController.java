@@ -14,34 +14,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.anthonycruz.models.Person;
+import br.com.anthonycruz.data.dto.v1.PersonDTO;
 import br.com.anthonycruz.services.PersonService;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/personDTO")
 public class PersonController {
 
 	@Autowired
 	private PersonService service;
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person findById(@PathVariable(value = "id") Long id) {
+	public PersonDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Person> findAll() {
+	public List<PersonDTO> findAll() {
 		return service.findAll();
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person create(@RequestBody Person person) {
-		return service.create(person);
+	public PersonDTO create(@RequestBody PersonDTO personDTO) {
+		return service.create(personDTO);
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person update(@RequestBody Person person) {
-		return service.update(person);
+	public PersonDTO update(@RequestBody PersonDTO personDTO) {
+		return service.update(personDTO);
 	}
 
 	@DeleteMapping(value = "/{id}")
