@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.anthonycruz.data.dto.v1.PersonDTO;
 import br.com.anthonycruz.exceptions.ResourceNotFoundException;
-import br.com.anthonycruz.mapper.DozerMapper;
+import br.com.anthonycruz.mapper.DTOMapper;
 import br.com.anthonycruz.models.Person;
 import br.com.anthonycruz.repositories.PersonRepository;
 
@@ -23,18 +23,18 @@ public class PersonService {
 		logger.info("Finding one personDTO");
 		Person entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
-		return DozerMapper.parseObject(entity, PersonDTO.class);
+		return DTOMapper.parseObject(entity, PersonDTO.class);
 	}
 
 	public List<PersonDTO> findAll() {
-		return DozerMapper.parseListObjects(repository.findAll(), PersonDTO.class);
+		return DTOMapper.parseListObjects(repository.findAll(), PersonDTO.class);
 	}
 
 	public PersonDTO create(PersonDTO personDTO) {
 		logger.info("Creating personDTO");
-		Person entity = DozerMapper.parseObject(personDTO, Person.class);
+		Person entity = DTOMapper.parseObject(personDTO, Person.class);
 		Person entitySaved = repository.save(entity);
-		return DozerMapper.parseObject(entitySaved, PersonDTO.class);
+		return DTOMapper.parseObject(entitySaved, PersonDTO.class);
 	}
 
 	public PersonDTO update(PersonDTO personDTO) {
@@ -48,7 +48,7 @@ public class PersonService {
 		entity.setGender(personDTO.getGender());
 		
 		Person entitySaved = repository.save(entity);
-		return DozerMapper.parseObject(entitySaved, PersonDTO.class);
+		return DTOMapper.parseObject(entitySaved, PersonDTO.class);
 	}
 
 	public void delete(Long id) {
