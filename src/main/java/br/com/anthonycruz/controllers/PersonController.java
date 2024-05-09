@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.anthonycruz.data.dto.v1.PersonDTO;
+import br.com.anthonycruz.data.dto.v2.PersonDTOv2;
 import br.com.anthonycruz.services.PersonService;
 
 @RestController
@@ -37,6 +38,11 @@ public class PersonController {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public PersonDTO create(@RequestBody PersonDTO personDTO) {
 		return service.create(personDTO);
+	}
+
+	@PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public PersonDTOv2 createV2(@RequestBody PersonDTOv2 personDTOv2) {
+		return service.createV2(personDTOv2);
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.anthonycruz.data.dto.v1.PersonDTO;
+import br.com.anthonycruz.data.dto.v2.PersonDTOv2;
 import br.com.anthonycruz.exceptions.ResourceNotFoundException;
 import br.com.anthonycruz.mapper.DTOMapper;
+import br.com.anthonycruz.mapper.custom.PersonMapper;
 import br.com.anthonycruz.models.Person;
 import br.com.anthonycruz.repositories.PersonRepository;
 
@@ -18,6 +20,9 @@ public class PersonService {
 
 	@Autowired
 	PersonRepository repository;
+	
+	@Autowired
+	PersonMapper personMapper;
 
 	public PersonDTO findById(Long id) {
 		logger.info("Finding one personDTO");
@@ -35,6 +40,13 @@ public class PersonService {
 		Person entity = DTOMapper.parseObject(personDTO, Person.class);
 		Person entitySaved = repository.save(entity);
 		return DTOMapper.parseObject(entitySaved, PersonDTO.class);
+	}
+	
+	public PersonDTOv2 createV2(PersonDTOv2 personDTOv2) {
+		logger.info("Creating personDTOv2");
+		Person entity = personMapper.convertDTOToEntity(personDTOv2);
+		Person entitySaved = repository.save(entity);
+		return personMapper.convertEntityToDTO(entitySaved);
 	}
 
 	public PersonDTO update(PersonDTO personDTO) {
