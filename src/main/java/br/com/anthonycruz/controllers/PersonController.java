@@ -18,7 +18,7 @@ import br.com.anthonycruz.data.dto.v1.PersonDTO;
 import br.com.anthonycruz.services.PersonService;
 
 @RestController
-@RequestMapping("/personDTO")
+@RequestMapping("/person")
 public class PersonController {
 
 	@Autowired

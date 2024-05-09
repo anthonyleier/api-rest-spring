@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.anthonycruz.data.dto.v1.PersonDTO;
 import br.com.anthonycruz.exceptions.ResourceNotFoundException;
+import br.com.anthonycruz.mapper.DozerMapper;
+import br.com.anthonycruz.models.Person;
 import br.com.anthonycruz.repositories.PersonRepository;
 
 @Service
@@ -19,34 +21,39 @@ public class PersonService {
 
 	public PersonDTO findById(Long id) {
 		logger.info("Finding one personDTO");
-		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+		Person entity = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+		return DozerMapper.parseObject(entity, PersonDTO.class);
 	}
 
 	public List<PersonDTO> findAll() {
-		return repository.findAll();
+		return DozerMapper.parseListObjects(repository.findAll(), PersonDTO.class);
 	}
 
 	public PersonDTO create(PersonDTO personDTO) {
 		logger.info("Creating personDTO");
-		return repository.save(personDTO);
+		Person entity = DozerMapper.parseObject(personDTO, Person.class);
+		Person entitySaved = repository.save(entity);
+		return DozerMapper.parseObject(entitySaved, PersonDTO.class);
 	}
 
 	public PersonDTO update(PersonDTO personDTO) {
 		logger.info("Updating personDTO");
-		PersonDTO entity = repository.findById(personDTO.getId())
+		Person entity = repository.findById(personDTO.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
 		entity.setFirstName(personDTO.getFirstName());
 		entity.setLastName(personDTO.getLastName());
 		entity.setAddress(personDTO.getAddress());
 		entity.setGender(personDTO.getGender());
-
-		return repository.save(entity);
+		
+		Person entitySaved = repository.save(entity);
+		return DozerMapper.parseObject(entitySaved, PersonDTO.class);
 	}
 
 	public void delete(Long id) {
 		logger.info("Deleting personDTO");
-		PersonDTO entity = repository.findById(id)
+		Person entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 		repository.delete(entity);
 	}
