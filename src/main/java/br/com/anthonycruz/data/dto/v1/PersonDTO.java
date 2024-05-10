@@ -20,7 +20,7 @@ public class PersonDTO implements Serializable {
 	@JsonProperty("last_name")
 	private String lastName;
 	
-	@JsonIgnore
+	// @JsonIgnore
 	private String gender;
 
 	public Long getId() {
