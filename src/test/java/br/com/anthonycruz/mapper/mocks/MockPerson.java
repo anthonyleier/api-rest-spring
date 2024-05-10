@@ -43,7 +43,7 @@ public class MockPerson {
 
 	public PersonDTO mockDTO(Integer number) {
 		PersonDTO person = new PersonDTO();
-		person.setId(number.longValue());
+		person.setKey(number.longValue());
 		person.setFirstName("First Name Test" + number);
 		person.setLastName("Last Name Test" + number);
 		person.setAddress("Address Test" + number);
