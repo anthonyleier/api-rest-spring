@@ -8,17 +8,17 @@ import br.com.anthonycruz.models.Person;
 
 public class MockPerson {
 	public Person mockEntity() {
-		return mockEntity(0);
+		return mockEntity(0L);
 	}
 
 	public PersonDTO mockDTO() {
-		return mockDTO(0);
+		return mockDTO(0L);
 	}
 
 	public List<Person> mockEntityList() {
 		List<Person> persons = new ArrayList<Person>();
 		for (int i = 0; i < 14; i++) {
-			persons.add(mockEntity(i));
+			persons.add(mockEntity(Long.valueOf(i)));
 		}
 		return persons;
 	}
@@ -26,28 +26,28 @@ public class MockPerson {
 	public List<PersonDTO> mockDTOList() {
 		List<PersonDTO> persons = new ArrayList<>();
 		for (int i = 0; i < 14; i++) {
-			persons.add(mockDTO(i));
+			persons.add(mockDTO(Long.valueOf(i)));
 		}
 		return persons;
 	}
 
-	public Person mockEntity(Integer number) {
+	public Person mockEntity(Long id) {
 		Person person = new Person();
-		person.setId(number.longValue());
-		person.setFirstName("First Name Test" + number);
-		person.setLastName("Last Name Test" + number);
-		person.setAddress("Address Test" + number);
-		person.setGender(((number % 2) == 0) ? "Male" : "Female");
+		person.setId(id);
+		person.setFirstName("First Name Test " + id);
+		person.setLastName("Last Name Test " + id);
+		person.setAddress("Address Test " + id);
+		person.setGender(((id % 2) == 0) ? "Male" : "Female");
 		return person;
 	}
 
-	public PersonDTO mockDTO(Integer number) {
+	public PersonDTO mockDTO(Long id) {
 		PersonDTO person = new PersonDTO();
-		person.setKey(number.longValue());
-		person.setFirstName("First Name Test" + number);
-		person.setLastName("Last Name Test" + number);
-		person.setAddress("Address Test" + number);
-		person.setGender(((number % 2) == 0) ? "Male" : "Female");
+		person.setKey(id);
+		person.setFirstName("First Name Test" + id);
+		person.setLastName("Last Name Test" + id);
+		person.setAddress("Address Test" + id);
+		person.setGender(((id % 2) == 0) ? "Male" : "Female");
 		return person;
 	}
 }
