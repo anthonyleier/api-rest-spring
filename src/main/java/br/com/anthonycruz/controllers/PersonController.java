@@ -27,20 +27,20 @@ public class PersonController {
 
 	@GetMapping(
 			value = "/{id}",
-			produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}
+			produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML }
 			)
 	public PersonDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
 
-	@GetMapping(produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
+	@GetMapping(produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML })
 	public List<PersonDTO> findAll() {
 		return service.findAll();
 	}
 
 	@PostMapping(
-			consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}, 
-			produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}
+			consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML }, 
+			produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML }
 			)
 	public PersonDTO create(@RequestBody PersonDTO personDTO) {
 		return service.create(personDTO);
@@ -48,16 +48,16 @@ public class PersonController {
 
 	@PostMapping(
 			value = "/v2",
-			consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML},
-			produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}
+			consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML },
+			produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML }
 			)
 	public PersonDTOv2 createV2(@RequestBody PersonDTOv2 personDTOv2) {
 		return service.createV2(personDTOv2);
 	}
 
 	@PutMapping(
-			consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML},
-			produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}
+			consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML },
+			produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML }
 			)
 	public PersonDTO update(@RequestBody PersonDTO personDTO) {
 		return service.update(personDTO);
