@@ -31,9 +31,6 @@ public class Person implements Serializable {
 	@Column(nullable = false, length = 30)
 	private String gender;
 
-	public Person() {
-	}
-
 	public Long getId() {
 		return id;
 	}
