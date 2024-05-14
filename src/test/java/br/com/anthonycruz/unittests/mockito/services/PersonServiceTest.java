@@ -17,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.anthonycruz.data.dto.v1.PersonDTO;
+import br.com.anthonycruz.exceptions.RequiredObjectIsNullException;
 import br.com.anthonycruz.mapper.mocks.MockPerson;
 import br.com.anthonycruz.models.Person;
 import br.com.anthonycruz.repositories.PersonRepository;
@@ -83,6 +84,18 @@ class PersonServiceTest {
 		assertEquals("Last Name Test 2", result.getLastName());
 		assertEquals("Male", result.getGender());
 	}
+	
+	@Test
+	void testCreateWithNullPerson() {	
+		Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
+			service.create(null);
+		});
+		
+		String expectedMessage = "Its not allowed to persist a null object";
+		String actualMessage = exception.getMessage();
+		
+		assertTrue(actualMessage.contains(expectedMessage));
+	}
 
 	@Test
 	void testUpdate() {
@@ -106,6 +119,18 @@ class PersonServiceTest {
 		assertEquals("First Name Test 3", result.getFirstName());
 		assertEquals("Last Name Test 3", result.getLastName());
 		assertEquals("Female", result.getGender());
+	}
+	
+	@Test
+	void testUpdateWithNullPerson() {	
+		Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
+			service.update(null);
+		});
+		
+		String expectedMessage = "Its not allowed to persist a null object";
+		String actualMessage = exception.getMessage();
+		
+		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
 	@Test

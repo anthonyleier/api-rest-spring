@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.anthonycruz.controllers.PersonController;
 import br.com.anthonycruz.data.dto.v1.PersonDTO;
 import br.com.anthonycruz.data.dto.v2.PersonDTOv2;
+import br.com.anthonycruz.exceptions.RequiredObjectIsNullException;
 import br.com.anthonycruz.exceptions.ResourceNotFoundException;
 import br.com.anthonycruz.mapper.DTOMapper;
 import br.com.anthonycruz.mapper.custom.PersonMapper;
@@ -47,6 +48,7 @@ public class PersonService {
 	}
 
 	public PersonDTO create(PersonDTO personDTO) {
+		if (personDTO == null) throw new RequiredObjectIsNullException();
 		logger.info("Creating personDTO");
 		Person entity = DTOMapper.parseObject(personDTO, Person.class);
 		Person entitySaved = repository.save(entity);
@@ -63,6 +65,7 @@ public class PersonService {
 	}
 
 	public PersonDTO update(PersonDTO personDTO) {
+		if (personDTO == null) throw new RequiredObjectIsNullException();
 		logger.info("Updating personDTO");
 		Person entity = repository.findById(personDTO.getKey())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
