@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -61,7 +62,40 @@ class PersonServiceTest {
 
 	@Test
 	void testFindAll() {
-		fail("Not yet implemented");
+		List<Person> entityList = input.mockEntityList();
+
+		when(repository.findAll()).thenReturn(entityList);
+		var result = service.findAll();
+
+		assertNotNull(result);
+		assertEquals(14, result.size());
+		
+		var entityOne = result.get(1);
+		assertNotNull(entityOne.getKey());
+		assertNotNull(entityOne.getLinks());
+		assertTrue(entityOne.toString().contains("/person/1"));
+		assertEquals("Address Test 1", entityOne.getAddress());
+		assertEquals("First Name Test 1", entityOne.getFirstName());
+		assertEquals("Last Name Test 1", entityOne.getLastName());
+		assertEquals("Female", entityOne.getGender());
+		
+		var entityFour = result.get(4);
+		assertNotNull(entityFour.getKey());
+		assertNotNull(entityFour.getLinks());
+		assertTrue(entityFour.toString().contains("/person/4"));
+		assertEquals("Address Test 4", entityFour.getAddress());
+		assertEquals("First Name Test 4", entityFour.getFirstName());
+		assertEquals("Last Name Test 4", entityFour.getLastName());
+		assertEquals("Male", entityFour.getGender());
+		
+		var entitySeven = result.get(7);
+		assertNotNull(entitySeven.getKey());
+		assertNotNull(entitySeven.getLinks());
+		assertTrue(entitySeven.toString().contains("/person/7"));
+		assertEquals("Address Test 7", entitySeven.getAddress());
+		assertEquals("First Name Test 7", entitySeven.getFirstName());
+		assertEquals("Last Name Test 7", entitySeven.getLastName());
+		assertEquals("Female", entitySeven.getGender());
 	}
 
 	@Test
