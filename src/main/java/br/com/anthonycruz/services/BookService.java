@@ -34,7 +34,8 @@ public class BookService {
 	}
 
 	public BookDTO update(BookDTO bookDTO) {
-		Book book = DTOMapper.parseObject(bookDTO, Book.class);
+		Book book = repository.findById(bookDTO.getId())
+				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
 		book.setTitle(bookDTO.getTitle());
 		book.setAuthor(bookDTO.getAuthor());

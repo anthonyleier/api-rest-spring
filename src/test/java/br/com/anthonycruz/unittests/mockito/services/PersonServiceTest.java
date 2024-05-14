@@ -27,9 +27,6 @@ import br.com.anthonycruz.services.PersonService;
 @TestInstance(Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
 class PersonServiceTest {
-
-	MockPerson input;
-
 	@InjectMocks
 	private PersonService service;
 
@@ -38,14 +35,13 @@ class PersonServiceTest {
 
 	@BeforeEach
 	void setUpMocks() throws Exception {
-		input = new MockPerson();
 		MockitoAnnotations.openMocks(this);
 	}
 
 	@Test
 	void testFindById() {
 		var testID = 1L;
-		Person entity = input.mockEntity(testID);
+		Person entity = MockPerson.mockEntity(testID);
 
 		when(repository.findById(testID)).thenReturn(Optional.of(entity));
 		var result = service.findById(testID);
@@ -53,7 +49,7 @@ class PersonServiceTest {
 		assertNotNull(result);
 		assertNotNull(result.getKey());
 		assertNotNull(result.getLinks());
-		assertTrue(result.toString().contains("/person/1"));
+		assertTrue(result.toString().contains("/persons/1"));
 		assertEquals("Address Test 1", result.getAddress());
 		assertEquals("First Name Test 1", result.getFirstName());
 		assertEquals("Last Name Test 1", result.getLastName());
@@ -62,7 +58,7 @@ class PersonServiceTest {
 
 	@Test
 	void testFindAll() {
-		List<Person> entityList = input.mockEntityList();
+		List<Person> entityList = MockPerson.mockEntityList();
 
 		when(repository.findAll()).thenReturn(entityList);
 		var result = service.findAll();
@@ -73,7 +69,7 @@ class PersonServiceTest {
 		var entityOne = result.get(1);
 		assertNotNull(entityOne.getKey());
 		assertNotNull(entityOne.getLinks());
-		assertTrue(entityOne.toString().contains("/person/1"));
+		assertTrue(entityOne.toString().contains("/persons/1"));
 		assertEquals("Address Test 1", entityOne.getAddress());
 		assertEquals("First Name Test 1", entityOne.getFirstName());
 		assertEquals("Last Name Test 1", entityOne.getLastName());
@@ -82,7 +78,7 @@ class PersonServiceTest {
 		var entityFour = result.get(4);
 		assertNotNull(entityFour.getKey());
 		assertNotNull(entityFour.getLinks());
-		assertTrue(entityFour.toString().contains("/person/4"));
+		assertTrue(entityFour.toString().contains("/persons/4"));
 		assertEquals("Address Test 4", entityFour.getAddress());
 		assertEquals("First Name Test 4", entityFour.getFirstName());
 		assertEquals("Last Name Test 4", entityFour.getLastName());
@@ -91,7 +87,7 @@ class PersonServiceTest {
 		var entitySeven = result.get(7);
 		assertNotNull(entitySeven.getKey());
 		assertNotNull(entitySeven.getLinks());
-		assertTrue(entitySeven.toString().contains("/person/7"));
+		assertTrue(entitySeven.toString().contains("/persons/7"));
 		assertEquals("Address Test 7", entitySeven.getAddress());
 		assertEquals("First Name Test 7", entitySeven.getFirstName());
 		assertEquals("Last Name Test 7", entitySeven.getLastName());
@@ -102,9 +98,8 @@ class PersonServiceTest {
 	void testCreate() {
 		var testID = 2L;
 		
-		Person persisted = input.mockEntity(testID);
-		PersonDTO personDTO = input.mockDTO(testID);
-		personDTO.setKey(testID);
+		Person persisted = MockPerson.mockEntity(testID);
+		PersonDTO personDTO = MockPerson.mockDTO(testID);
 	
 		when(repository.save(any(Person.class))).thenReturn(persisted);
 		var result = service.create(personDTO);
@@ -112,7 +107,7 @@ class PersonServiceTest {
 		assertNotNull(result);
 		assertNotNull(result.getKey());
 		assertNotNull(result.getLinks());
-		assertTrue(result.toString().contains("/person/2"));
+		assertTrue(result.toString().contains("/persons/2"));
 		assertEquals("Address Test 2", result.getAddress());
 		assertEquals("First Name Test 2", result.getFirstName());
 		assertEquals("Last Name Test 2", result.getLastName());
@@ -135,20 +130,18 @@ class PersonServiceTest {
 	void testUpdate() {
 		var testID = 3L;
 		
-		Person entity = input.mockEntity(testID);
+		Person entity = MockPerson.mockEntity(testID);
 		Person persisted = entity;
-		PersonDTO personDTO = input.mockDTO(testID);
+		PersonDTO personDTO = MockPerson.mockDTO(testID);
 		
 		when(repository.findById(testID)).thenReturn(Optional.of(entity));
 		when(repository.save(entity)).thenReturn(persisted);
-		
 		var result = service.update(personDTO);
-		System.out.println(result.getFirstName());
 
 		assertNotNull(result);
 		assertNotNull(result.getKey());
 		assertNotNull(result.getLinks());
-		assertTrue(result.toString().contains("/person/3"));
+		assertTrue(result.toString().contains("/persons/3"));
 		assertEquals("Address Test 3", result.getAddress());
 		assertEquals("First Name Test 3", result.getFirstName());
 		assertEquals("Last Name Test 3", result.getLastName());
@@ -170,7 +163,7 @@ class PersonServiceTest {
 	@Test
 	void testDelete() {
 		var testID = 1L;
-		Person entity = input.mockEntity(testID);
+		Person entity = MockPerson.mockEntity(testID);
 
 		when(repository.findById(testID)).thenReturn(Optional.of(entity));
 		service.delete(testID);
