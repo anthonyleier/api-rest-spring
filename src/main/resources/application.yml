@@ -11,6 +11,8 @@ spring:
       ddl-auto: none
 
 springdoc:
-  paths-to-match: /person/**
+  paths-to-match:
+    - /persons/**
+    - /books/**
   swagger-ui:
     use-root-path: true
