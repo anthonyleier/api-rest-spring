@@ -2,6 +2,8 @@ package br.com.anthonycruz.unittests.mockito.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -19,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.anthonycruz.data.dto.v1.BookDTO;
+import br.com.anthonycruz.exceptions.RequiredObjectIsNullException;
 import br.com.anthonycruz.mapper.mocks.MockBook;
 import br.com.anthonycruz.models.Book;
 import br.com.anthonycruz.repositories.BookRepository;
@@ -65,29 +68,29 @@ public class BookServiceTest {
 
 		assertNotNull(result);
 		assertEquals(14, result.size());
-		
+
 		var bookOne = result.get(1);
 		assertNotNull(bookOne.getId());
-		//assertNotNull(bookOne.getLinks());
-		//assertTrue(bookOne.toString().contains("/books/1"));
+		// assertNotNull(bookOne.getLinks());
+		// assertTrue(bookOne.toString().contains("/books/1"));
 		assertEquals("Book Title 1", bookOne.getTitle());
 		assertEquals("Book Author 1", bookOne.getAuthor());
 		assertEquals(1, bookOne.getPrice());
 		assertNotNull(bookOne.getLaunchDate());
-		
+
 		var bookFour = result.get(4);
 		assertNotNull(bookFour.getId());
-		//assertNotNull(bookFour.getLinks());
-		//assertTrue(bookFour.toString().contains("/books/4"));
+		// assertNotNull(bookFour.getLinks());
+		// assertTrue(bookFour.toString().contains("/books/4"));
 		assertEquals("Book Title 4", bookFour.getTitle());
 		assertEquals("Book Author 4", bookFour.getAuthor());
 		assertEquals(4, bookFour.getPrice());
 		assertNotNull(bookFour.getLaunchDate());
-		
+
 		var bookSeven = result.get(7);
 		assertNotNull(bookSeven.getId());
-		//assertNotNull(bookSeven.getLinks());
-		//assertTrue(bookSeven.toString().contains("/books/7"));
+		// assertNotNull(bookSeven.getLinks());
+		// assertTrue(bookSeven.toString().contains("/books/7"));
 		assertEquals("Book Title 7", bookSeven.getTitle());
 		assertEquals("Book Author 7", bookSeven.getAuthor());
 		assertEquals(7, bookSeven.getPrice());
@@ -115,6 +118,18 @@ public class BookServiceTest {
 	}
 
 	@Test
+	void testCreateWithNullBook() {
+		Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
+			service.create(null);
+		});
+
+		String expectedMessage = "Its not allowed to persist a null object";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
+	}
+
+	@Test
 	void testUpdate() {
 		var testID = 3L;
 
@@ -134,6 +149,18 @@ public class BookServiceTest {
 		assertEquals("Book Author 3", result.getAuthor());
 		assertEquals(3, result.getPrice());
 		assertNotNull(result.getLaunchDate());
+	}
+	
+	@Test
+	void testUpdateWithNullBook() {
+		Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
+			service.update(null);
+		});
+		
+		String expectedMessage = "Its not allowed to persist a null object";
+		String actualMessage = exception.getMessage();
+		
+		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
 	@Test

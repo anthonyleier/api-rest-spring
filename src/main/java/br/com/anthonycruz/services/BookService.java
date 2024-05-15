@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.anthonycruz.data.dto.v1.BookDTO;
+import br.com.anthonycruz.exceptions.RequiredObjectIsNullException;
 import br.com.anthonycruz.exceptions.ResourceNotFoundException;
 import br.com.anthonycruz.mapper.DTOMapper;
 import br.com.anthonycruz.models.Book;
@@ -28,12 +29,15 @@ public class BookService {
 	}
 
 	public BookDTO create(BookDTO bookDTO) {
+		if (bookDTO == null) throw new RequiredObjectIsNullException();
 		Book book = DTOMapper.parseObject(bookDTO, Book.class);
 		var savedBook = repository.save(book);
 		return DTOMapper.parseObject(savedBook, BookDTO.class);
 	}
 
 	public BookDTO update(BookDTO bookDTO) {
+		if (bookDTO == null) throw new RequiredObjectIsNullException();
+		
 		Book book = repository.findById(bookDTO.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
