@@ -8,19 +8,19 @@ import br.com.anthonycruz.data.dto.v1.BookDTO;
 import br.com.anthonycruz.models.Book;
 
 public class MockBook {
-	public static Book mockBook() {
-		return mockBook(0L);
+	public static Book mockEntity() {
+		return mockEntity(0L);
 	}
 
-	public static List<Book> mockBookList() {
+	public static List<Book> mockEntityList() {
 		List<Book> books = new ArrayList<Book>();
 		for (int i = 0; i < 14; i++) {
-			books.add(mockBook(Long.valueOf(i)));
+			books.add(mockEntity(Long.valueOf(i)));
 		}
 		return books;
 	}
 
-	public static Book mockBook(Long id) {
+	public static Book mockEntity(Long id) {
 		Book book = new Book();
 		book.setId(id);
 		book.setTitle("Book Title " + id);
@@ -30,19 +30,19 @@ public class MockBook {
 		return book;
 	}
 
-	public static BookDTO mockBookDTO() {
-		return mockBookDTO();
+	public static BookDTO mockDTO() {
+		return mockDTO();
 	}
 
-	public static List<BookDTO> mockBookDTOList() {
+	public static List<BookDTO> mockDTOList() {
 		List<BookDTO> booksDTO = new ArrayList<BookDTO>();
 		for (int i = 0; i < 14; i++) {
-			booksDTO.add(mockBookDTO(Long.valueOf(i)));
+			booksDTO.add(mockDTO(Long.valueOf(i)));
 		}
 		return booksDTO;
 	}
 
-	public static BookDTO mockBookDTO(Long id) {
+	public static BookDTO mockDTO(Long id) {
 		BookDTO bookDTO = new BookDTO();
 		bookDTO.setId(id);
 		bookDTO.setTitle("Book Title " + id);

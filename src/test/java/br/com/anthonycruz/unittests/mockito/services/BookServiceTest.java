@@ -41,7 +41,7 @@ public class BookServiceTest {
 	@Test
 	void testFindById() {
 		var testID = 1L;
-		Book book = MockBook.mockBook(testID);
+		Book book = MockBook.mockEntity(testID);
 
 		when(repository.findById(testID)).thenReturn(Optional.of(book));
 		var result = service.findById(testID);
@@ -58,7 +58,7 @@ public class BookServiceTest {
 
 	@Test
 	void testFindAll() {
-		List<Book> bookList = MockBook.mockBookList();
+		List<Book> bookList = MockBook.mockEntityList();
 
 		when(repository.findAll()).thenReturn(bookList);
 		var result = service.findAll();
@@ -98,8 +98,8 @@ public class BookServiceTest {
 	void testCreate() {
 		var testID = 2L;
 
-		Book persisted = MockBook.mockBook(testID);
-		BookDTO personDTO = MockBook.mockBookDTO(testID);
+		Book persisted = MockBook.mockEntity(testID);
+		BookDTO personDTO = MockBook.mockDTO(testID);
 
 		when(repository.save(any(Book.class))).thenReturn(persisted);
 		var result = service.create(personDTO);
@@ -130,9 +130,9 @@ public class BookServiceTest {
 	void testUpdate() {
 		var testID = 3L;
 
-		Book book = MockBook.mockBook(testID);
+		Book book = MockBook.mockEntity(testID);
 		Book bookPersisted = book;
-		BookDTO bookDTO = MockBook.mockBookDTO(testID);
+		BookDTO bookDTO = MockBook.mockDTO(testID);
 
 		when(repository.findById(testID)).thenReturn(Optional.of(book));
 		when(repository.save(book)).thenReturn(bookPersisted);
@@ -163,7 +163,7 @@ public class BookServiceTest {
 	@Test
 	void testDelete() {
 		var testID = 1L;
-		Book book = MockBook.mockBook(testID);
+		Book book = MockBook.mockEntity(testID);
 
 		when(repository.findById(testID)).thenReturn(Optional.of(book));
 		service.delete(testID);
