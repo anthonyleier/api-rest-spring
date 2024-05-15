@@ -3,6 +3,7 @@ package br.com.anthonycruz.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,8 +65,9 @@ public class PersonController {
 			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
 			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 			})
-	public PersonDTO create(@RequestBody PersonDTO personDTO) {
-		return service.create(personDTO);
+	public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO personDTO) {
+		var personDTOResponse = service.create(personDTO);
+		return new ResponseEntity<>(personDTOResponse, HttpStatus.CREATED);
 	}
 
 	@PostMapping(value = "/v2", consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML }, produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML })

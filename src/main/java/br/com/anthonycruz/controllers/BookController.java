@@ -3,6 +3,7 @@ package br.com.anthonycruz.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,8 +64,9 @@ public class BookController {
 			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
 			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 			})
-	public BookDTO create(@RequestBody BookDTO bookDTO) {
-		return service.create(bookDTO);
+	public ResponseEntity<BookDTO> create(@RequestBody BookDTO bookDTO) {
+		var savedBookDTO = service.create(bookDTO);
+		return new ResponseEntity<>(savedBookDTO, HttpStatus.CREATED);
 	}
 
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML }, produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML })
