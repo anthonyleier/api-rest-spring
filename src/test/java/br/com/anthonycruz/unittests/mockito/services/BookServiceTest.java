@@ -1,9 +1,6 @@
 package br.com.anthonycruz.unittests.mockito.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -51,8 +48,8 @@ public class BookServiceTest {
 
 		assertNotNull(result);
 		assertNotNull(result.getId());
-		// assertNotNull(result.getLinks());
-		// assertTrue(result.toString().contains("/books/1"));
+		assertNotNull(result.getLinks());
+		assertTrue(result.toString().contains("/books/1"));
 		assertEquals("Book Title 1", result.getTitle());
 		assertEquals("Book Author 1", result.getAuthor());
 		assertEquals(1, result.getPrice());
@@ -71,8 +68,8 @@ public class BookServiceTest {
 
 		var bookOne = result.get(1);
 		assertNotNull(bookOne.getId());
-		// assertNotNull(bookOne.getLinks());
-		// assertTrue(bookOne.toString().contains("/books/1"));
+		assertNotNull(bookOne.getLinks());
+		assertTrue(bookOne.toString().contains("/books/1"));
 		assertEquals("Book Title 1", bookOne.getTitle());
 		assertEquals("Book Author 1", bookOne.getAuthor());
 		assertEquals(1, bookOne.getPrice());
@@ -80,8 +77,8 @@ public class BookServiceTest {
 
 		var bookFour = result.get(4);
 		assertNotNull(bookFour.getId());
-		// assertNotNull(bookFour.getLinks());
-		// assertTrue(bookFour.toString().contains("/books/4"));
+		assertNotNull(bookFour.getLinks());
+		assertTrue(bookFour.toString().contains("/books/4"));
 		assertEquals("Book Title 4", bookFour.getTitle());
 		assertEquals("Book Author 4", bookFour.getAuthor());
 		assertEquals(4, bookFour.getPrice());
@@ -89,8 +86,8 @@ public class BookServiceTest {
 
 		var bookSeven = result.get(7);
 		assertNotNull(bookSeven.getId());
-		// assertNotNull(bookSeven.getLinks());
-		// assertTrue(bookSeven.toString().contains("/books/7"));
+		assertNotNull(bookSeven.getLinks());
+		assertTrue(bookSeven.toString().contains("/books/7"));
 		assertEquals("Book Title 7", bookSeven.getTitle());
 		assertEquals("Book Author 7", bookSeven.getAuthor());
 		assertEquals(7, bookSeven.getPrice());
@@ -109,8 +106,8 @@ public class BookServiceTest {
 
 		assertNotNull(result);
 		assertNotNull(result.getId());
-		// assertNotNull(result.getLinks());
-		// assertTrue(result.toString().contains("/books/2"));
+		assertNotNull(result.getLinks());
+		assertTrue(result.toString().contains("/books/2"));
 		assertEquals("Book Title 2", result.getTitle());
 		assertEquals("Book Author 2", result.getAuthor());
 		assertEquals(2, result.getPrice());
@@ -143,8 +140,8 @@ public class BookServiceTest {
 
 		assertNotNull(result);
 		assertNotNull(result.getId());
-		// assertNotNull(result.getLinks());
-		// assertTrue(result.toString().contains("/books/3"));
+		assertNotNull(result.getLinks());
+		assertTrue(result.toString().contains("/books/3"));
 		assertEquals("Book Title 3", result.getTitle());
 		assertEquals("Book Author 3", result.getAuthor());
 		assertEquals(3, result.getPrice());
