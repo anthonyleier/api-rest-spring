@@ -29,7 +29,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/persons")
 @Tag(name = "People", description = "Endpoints for managing people")
-@CrossOrigin(origins = {"http://localhost:8080", "https://anthonycruz.com.br"})
+// @CrossOrigin(origins = {"http://localhost:8080", "https://anthonycruz.com.br"})
 public class PersonController {
 
 	@Autowired
@@ -46,7 +46,8 @@ public class PersonController {
 	public List<PersonDTO> findAll() {
 		return service.findAll();
 	}
-
+	
+	// @CrossOrigin(origins = {"http://localhost:8080"})
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML })
 	@Operation(summary = "Search for a person", description = "Searches for a person with a specific ID", tags = {"People"}, responses = { 
 			@ApiResponse(description = "Success", responseCode = "200", content = @Content(schema = @Schema(implementation = PersonDTO.class))),
