@@ -167,11 +167,15 @@
 							{
 								"key": "Accept",
 								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "https://anthonycruz.com.br"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": \"<long>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"address\": \"<string>\",\n  \"_links\": {\n    \"nisi_a5\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"dolora\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"minim1\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"Loremb5c\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"velit97\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    }\n  }\n}",
+							"raw": "{\n\t\"id\": 45,\n  \"first_name\": \"Anthony2\",\n  \"last_name\": \"Cruz2\",\n  \"gender\": \"Male\",\n  \"address\": \"Caçador/SC\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -399,11 +403,20 @@
 							{
 								"key": "Accept",
 								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "https://anthonycruz.com.br"
+							},
+							{
+								"key": "Origin",
+								"value": "https://google.com.br",
+								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": \"<long>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"address\": \"<string>\",\n  \"_links\": {\n    \"nisi_a5\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"dolora\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"minim1\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"Loremb5c\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"velit97\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    }\n  }\n}",
+							"raw": "{\n  \"first_name\": \"Anthony\",\n  \"last_name\": \"Cruz\",\n  \"gender\": \"Male\",\n  \"address\": \"Caçador/SC\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -590,23 +603,25 @@
 							{
 								"key": "Accept",
 								"value": "application/json"
+							},
+							{
+								"key": "Origin",
+								"value": "https://anthonycruz.com.br"
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:8080",
+								"disabled": true
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/persons/:id",
+							"raw": "{{baseUrl}}/persons/33",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"persons",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "<long>",
-									"description": "(Required) "
-								}
+								"33"
 							]
 						},
 						"description": "Searches for a person with a specific ID"
@@ -798,20 +813,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/persons/:id",
+							"raw": "{{baseUrl}}/persons/33",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"persons",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "<long>",
-									"description": "(Required) "
-								}
+								"33"
 							]
 						},
 						"description": "Deletes a person with a specific ID"
@@ -823,10 +831,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/persons/:id",
+									"raw": "http://localhost:8080/persons/:id",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "8080",
 									"path": [
 										"persons",
 										":id"
@@ -1124,7 +1134,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"author\": \"<string>\",\n  \"price\": \"<double>\",\n  \"launchDate\": \"<dateTime>\",\n  \"_links\": {\n    \"ad_99\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"sit45\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"nullae\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    }\n  }\n}",
+							"raw": "{\n    \"id\": 22,\n    \"title\": \"Working effectively with legacy code\",\n    \"author\": \"Michael C. Feathers\",\n    \"price\": 55.0,\n    \"launchDate\": \"2017-11-29T00:00:00.000+00:00\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -1169,12 +1179,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/books",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/books",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "8080",
 									"path": [
 										"books"
 									]
@@ -1358,7 +1366,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": \"<long>\",\n  \"title\": \"<string>\",\n  \"author\": \"<string>\",\n  \"price\": \"<double>\",\n  \"launchDate\": \"<dateTime>\",\n  \"_links\": {\n    \"ad_99\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"sit45\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    },\n    \"nullae\": {\n      \"href\": \"<string>\",\n      \"hreflang\": \"<string>\",\n      \"title\": \"<string>\",\n      \"type\": \"<string>\",\n      \"deprecation\": \"<string>\",\n      \"profile\": \"<string>\",\n      \"name\": \"<string>\",\n      \"templated\": \"<boolean>\"\n    }\n  }\n}",
+							"raw": "{\n    \"title\": \"Working effectively with legacy code\",\n    \"author\": \"Michael C. Feathers\",\n    \"price\": 49.0,\n    \"launchDate\": \"2017-11-29\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -1403,12 +1411,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/books",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/books",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "8080",
 									"path": [
 										"books"
 									]
@@ -1550,20 +1556,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/books/:id",
+							"raw": "{{baseUrl}}/books/1",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "<long>",
-									"description": "(Required) "
-								}
+								"1"
 							]
 						},
 						"description": "Searches for a book with a specific ID"
@@ -1580,10 +1579,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/books/:id",
+									"raw": "http://localhost:8080/books/:id",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "8080",
 									"path": [
 										"books",
 										":id"
@@ -1755,20 +1756,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/books/:id",
+							"raw": "{{baseUrl}}/books/22",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "<long>",
-									"description": "(Required) "
-								}
+								"22"
 							]
 						},
 						"description": "Deletes a book with a specific ID"
@@ -1780,10 +1774,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/books/:id",
+									"raw": "http://localhost:8080/books/:id",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "8080",
 									"path": [
 										"books",
 										":id"
