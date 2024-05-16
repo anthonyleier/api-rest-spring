@@ -1,0 +1,15 @@
+{
+	"id": "07f6d28e-6ed1-46c8-b9ef-693356ba599c",
+	"name": "api-rest-spring",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-05-16T12:18:09.359Z",
+	"_postman_exported_using": "Postman/11.1.2"
+}
