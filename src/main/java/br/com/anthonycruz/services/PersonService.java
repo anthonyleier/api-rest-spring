@@ -51,7 +51,7 @@ public class PersonService {
 		var entitySaved = repository.save(entity);
 		var personDTOResponse = DTOMapper.parseObject(entitySaved, PersonDTO.class);
 		
-		personDTOResponse.add(linkTo(methodOn(PersonController.class).findById(personDTO.getKey())).withSelfRel());
+		personDTOResponse.add(linkTo(methodOn(PersonController.class).findById(personDTOResponse.getKey())).withSelfRel());
 		return personDTOResponse;
 	}
 

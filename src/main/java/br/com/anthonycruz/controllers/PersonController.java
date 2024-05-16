@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +29,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/persons")
 @Tag(name = "People", description = "Endpoints for managing people")
+@CrossOrigin(origins = {"http://localhost:8080", "https://anthonycruz.com.br"})
 public class PersonController {
 
 	@Autowired
 	private PersonService service;
-
+	
 	@GetMapping(produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML })
 	@Operation(summary = "Search for all people", description = "Search for all people in the database", tags = {"People"}, responses = { 
 			@ApiResponse(description = "Success", responseCode = "200", content = { @Content( mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = PersonDTO.class)))}),
@@ -57,7 +59,7 @@ public class PersonController {
 	public PersonDTO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
-
+	
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML }, produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML })
 	@Operation(summary = "Add a new person", description = "Adds a new person by passing a JSON, XML, or YAML representation", tags = {"People"}, responses = {
 			@ApiResponse(description = "Success", responseCode = "200", content = @Content(schema = @Schema(implementation = PersonDTO.class))),
