@@ -14,7 +14,7 @@ import org.testcontainers.lifecycle.Startables;
 @ContextConfiguration(initializers = AbstractIntegrationTest.Initizalier.class)
 public class AbstractIntegrationTest {
 
-	public class Initizalier implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+	static class Initizalier implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 		static MySQLContainer<?> container = new MySQLContainer<>("mysql:8.4.0");
 
 		private static void startContainers() {
