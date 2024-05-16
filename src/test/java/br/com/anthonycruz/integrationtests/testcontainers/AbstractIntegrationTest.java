@@ -1,4 +1,4 @@
-package br.com.anthonycruz.integrationtest.testcontainers;
+package br.com.anthonycruz.integrationtests.testcontainers;
 
 import java.util.Map;
 import java.util.stream.Stream;

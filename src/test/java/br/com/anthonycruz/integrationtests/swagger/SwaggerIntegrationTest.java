@@ -1,4 +1,4 @@
-package br.com.anthonycruz.integrationtest.swagger;
+package br.com.anthonycruz.integrationtests.swagger;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.anthonycruz.config.TestConfig;
-import br.com.anthonycruz.integrationtest.testcontainers.AbstractIntegrationTest;
+import br.com.anthonycruz.integrationtests.testcontainers.AbstractIntegrationTest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class SwaggerIntegrationTest extends AbstractIntegrationTest {
