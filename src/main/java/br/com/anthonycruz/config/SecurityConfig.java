@@ -63,7 +63,8 @@ public class SecurityConfig {
                     		"/swagger-ui/**",
                     		"/v3/api-docs/**"
                 		).permitAll()
-                        .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/persons/**").authenticated()
+                        .requestMatchers("/books/**").authenticated()
                         .requestMatchers("/users").denyAll()
                 )
                 .cors(cors -> {})
