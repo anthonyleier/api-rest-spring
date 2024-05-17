@@ -2,10 +2,8 @@
 	"info": {
 		"_postman_id": "0ead91f5-0465-4398-b8f2-92d7858a848d",
 		"name": "RESTful API com Java/Spring Boot",
-		"description": "Aprendizado de Spring Boot com API REST e padrões de projeto",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24415316",
-		"_collection_link": "https://www.postman.com/anthonyleier/workspace/pblico/collection/24415316-0ead91f5-0465-4398-b8f2-92d7858a848d?action=share&source=collection_link&creator=24415316"
+		"_exporter_id": "24415316"
 	},
 	"item": [
 		{
@@ -17,8 +15,9 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Accept",
-								"value": "application/json"
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -161,21 +160,14 @@
 						"method": "PUT",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Origin",
-								"value": "https://anthonycruz.com.br"
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": 45,\n  \"first_name\": \"Anthony2\",\n  \"last_name\": \"Cruz2\",\n  \"gender\": \"Male\",\n  \"address\": \"Caçador/SC\"\n}",
+							"raw": "{\n    \"id\": 21,\n    \"first_name\": \"Anthony2\",\n    \"last_name\": \"Cruz2\",\n    \"gender\": \"Male\",\n    \"address\": \"Caçador/SC\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -397,21 +389,9 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Origin",
-								"value": "https://anthonycruz.com.br"
-							},
-							{
-								"key": "Origin",
-								"value": "https://google.com.br",
-								"disabled": true
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -601,27 +581,19 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Accept",
-								"value": "application/json"
-							},
-							{
-								"key": "Origin",
-								"value": "https://anthonycruz.com.br"
-							},
-							{
-								"key": "Origin",
-								"value": "http://localhost:8080",
-								"disabled": true
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/persons/33",
+							"raw": "{{baseUrl}}/persons/2",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"persons",
-								"33"
+								"2"
 							]
 						},
 						"description": "Searches for a person with a specific ID"
@@ -811,15 +783,21 @@
 					"name": "Delete a person",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{baseUrl}}/persons/33",
+							"raw": "{{baseUrl}}/persons/1",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"persons",
-								"33"
+								"1"
 							]
 						},
 						"description": "Deletes a person with a specific ID"
@@ -831,12 +809,10 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/persons/:id",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/persons/:id",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "8080",
 									"path": [
 										"persons",
 										":id"
@@ -980,8 +956,9 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Accept",
-								"value": "application/json"
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -1124,17 +1101,14 @@
 						"method": "PUT",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 22,\n    \"title\": \"Working effectively with legacy code\",\n    \"author\": \"Michael C. Feathers\",\n    \"price\": 55.0,\n    \"launchDate\": \"2017-11-29T00:00:00.000+00:00\"\n}",
+							"raw": "{\n    \"id\": 16,\n    \"title\": \"Working effectively with legacy code\",\n    \"author\": \"Michael C. Feathers\",\n    \"price\": 55.0,\n    \"launchDate\": \"2017-11-29T00:00:00.000+00:00\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -1356,12 +1330,9 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1551,18 +1522,19 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Accept",
-								"value": "application/json"
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/books/1",
+							"raw": "{{baseUrl}}/books/2",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books",
-								"1"
+								"2"
 							]
 						},
 						"description": "Searches for a book with a specific ID"
@@ -1579,12 +1551,10 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:8080/books/:id",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/books/:id",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "8080",
 									"path": [
 										"books",
 										":id"
@@ -1754,15 +1724,21 @@
 					"name": "Delete a book",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{baseUrl}}/books/22",
+							"raw": "{{baseUrl}}/books/2",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books",
-								"22"
+								"2"
 							]
 						},
 						"description": "Deletes a book with a specific ID"
@@ -1774,12 +1750,10 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/books/:id",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/books/:id",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "8080",
 									"path": [
 										"books",
 										":id"
@@ -1913,12 +1887,113 @@
 					]
 				}
 			]
-		}
-	],
-	"variable": [
+		},
 		{
-			"key": "baseUrl",
-			"value": "http://localhost:8080"
+			"name": "auth",
+			"item": [
+				{
+					"name": "Authenticate a user and returns a token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code >= 200 && pm.response.code <= 299) {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    pm.environment.set(\"accessToken\", jsonData.accessToken);\r",
+									"    pm.environment.set(\"refreshToken\", jsonData.refreshToken);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/auth/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "<string>"
+						}
+					]
+				}
+			]
 		}
 	]
 }
