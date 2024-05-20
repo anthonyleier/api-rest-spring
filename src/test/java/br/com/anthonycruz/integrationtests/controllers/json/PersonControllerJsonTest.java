@@ -228,9 +228,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 	
 	@Test
 	@Order(6)
-	public void testDelete() throws JsonMappingException, JsonProcessingException {
-		mockPerson();
-		
+	public void testDelete() throws JsonMappingException, JsonProcessingException {		
 		given()
 		.spec(specification)
 		.contentType(TestConfig.CONTENT_TYPE_JSON)
