@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.anthonycruz.data.dto.v1.PersonDTO;
@@ -13,16 +12,9 @@ import br.com.anthonycruz.mapper.mocks.MockPerson;
 import br.com.anthonycruz.models.Person;
 
 public class DTOMapperTest {
-	MockPerson inputObject;
-
-	@BeforeEach
-	public void setUp() {
-		inputObject = new MockPerson();
-	}
-
 	@Test
 	public void parseEntityToDTOTest() {
-		PersonDTO output = DTOMapper.parseObject(inputObject.mockEntity(), PersonDTO.class);
+		PersonDTO output = DTOMapper.parseObject(MockPerson.mockEntity(), PersonDTO.class);
 		assertEquals(Long.valueOf(0L), output.getKey());
 		assertEquals("First Name Test 0", output.getFirstName());
 		assertEquals("Last Name Test 0", output.getLastName());
@@ -32,7 +24,7 @@ public class DTOMapperTest {
 
 	@Test
 	public void parseEntityListToDTOListTest() {
-		List<PersonDTO> outputList = DTOMapper.parseListObjects(inputObject.mockEntityList(), PersonDTO.class);
+		List<PersonDTO> outputList = DTOMapper.parseListObjects(MockPerson.mockEntityList(), PersonDTO.class);
 		PersonDTO outputZero = outputList.get(0);
 
 		assertEquals(Long.valueOf(0L), outputZero.getKey());
@@ -60,7 +52,7 @@ public class DTOMapperTest {
 
 	@Test
 	public void parseDTOToEntityTest() {
-		Person output = DTOMapper.parseObject(inputObject.mockDTO(), Person.class);
+		Person output = DTOMapper.parseObject(MockPerson.mockDTO(), Person.class);
 		assertEquals(Long.valueOf(0L), output.getId());
 		assertEquals("First Name Test 0", output.getFirstName());
 		assertEquals("Last Name Test 0", output.getLastName());
@@ -70,7 +62,7 @@ public class DTOMapperTest {
 
 	@Test
 	public void parserDTOListToEntityListTest() {
-		List<Person> outputList = DTOMapper.parseListObjects(inputObject.mockDTOList(), Person.class);
+		List<Person> outputList = DTOMapper.parseListObjects(MockPerson.mockDTOList(), Person.class);
 		Person outputZero = outputList.get(0);
 
 		assertEquals(Long.valueOf(0L), outputZero.getId());
