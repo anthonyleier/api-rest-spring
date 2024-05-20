@@ -5,6 +5,9 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class PersonDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -17,6 +20,8 @@ public class PersonDTO implements Serializable {
 
 	@JsonProperty("last_name")
 	private String lastName;
+	
+	public PersonDTO() {}
 
 	public Long getId() {
 		return id;

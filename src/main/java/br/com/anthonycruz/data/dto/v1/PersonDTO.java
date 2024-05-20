@@ -24,6 +24,8 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
 
 	// @JsonIgnore
 	private String gender;
+	
+	public PersonDTO() {}
 
 	public Long getKey() {
 		return key;
