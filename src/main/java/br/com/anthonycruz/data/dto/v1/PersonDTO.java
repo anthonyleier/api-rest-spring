@@ -15,11 +15,7 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
 	@JsonProperty("id")
 	private Long key;
 	private String address;
-
-	@JsonProperty("first_name")
 	private String firstName;
-
-	@JsonProperty("last_name")
 	private String lastName;
 
 	// @JsonIgnore

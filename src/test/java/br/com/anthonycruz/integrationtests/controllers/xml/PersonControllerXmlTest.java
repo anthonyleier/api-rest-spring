@@ -1,7 +1,9 @@
-package br.com.anthonycruz.integrationtests.controllers.json;
+package br.com.anthonycruz.integrationtests.controllers.xml;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import br.com.anthonycruz.config.TestConfig;
 import br.com.anthonycruz.integrationtests.dto.AccountCredentialsDTO;
@@ -31,9 +33,9 @@ import io.restassured.specification.RequestSpecification;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(OrderAnnotation.class)
-public class PersonControllerJsonTest extends AbstractIntegrationTest {
+public class PersonControllerXmlTest extends AbstractIntegrationTest {
 	private static RequestSpecification specification;
-	private static ObjectMapper objectMapper;
+	private static XmlMapper xmlMapper;
 	private static PersonDTO person;
 	
 	private void mockPerson() {
@@ -45,8 +47,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 
 	@BeforeAll
 	public static void setUp() {
-		objectMapper = new ObjectMapper();
-		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		xmlMapper = new XmlMapper();
+		xmlMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		person = new PersonDTO();
 	}
 	
@@ -58,7 +60,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		var accessToken = given()
 				.basePath("/auth/signin")
 					.port(TestConfig.SERVER_PORT)
-					.contentType(TestConfig.CONTENT_TYPE_JSON)
+					.contentType(TestConfig.CONTENT_TYPE_XML)
+					.accept(TestConfig.CONTENT_TYPE_XML)
 				.body(user)
 				.when()
 					.post()
@@ -67,7 +70,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 				.extract()
 					.body()
 						.as(TokenDTO.class).getAccessToken();
-		
+
 		specification = new RequestSpecBuilder()
 				.addHeader(TestConfig.HEADER_PARAM_AUTHORIZATION, "Bearer " + accessToken)
 				.setBasePath("/persons")
@@ -84,7 +87,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		
 		var content = given()
 				.spec(specification)
-				.contentType(TestConfig.CONTENT_TYPE_JSON)
+				.contentType(TestConfig.CONTENT_TYPE_XML)
+				.accept(TestConfig.CONTENT_TYPE_XML)
 				.header(TestConfig.HEADER_PARAM_ORIGIN, TestConfig.ORIGIN_ANTHONYCRUZ)
 				.body(person)
 				.when()
@@ -95,7 +99,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 					.body()
 						.asString();
 		
-		PersonDTO persistedPerson = objectMapper.readValue(content, PersonDTO.class);
+		PersonDTO persistedPerson = xmlMapper.readValue(content, PersonDTO.class);
 		person = persistedPerson;
 		
 		assertNotNull(persistedPerson);
@@ -119,7 +123,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		
 		var content = given()
 				.spec(specification)
-				.contentType(TestConfig.CONTENT_TYPE_JSON)
+				.contentType(TestConfig.CONTENT_TYPE_XML)
+				.accept(TestConfig.CONTENT_TYPE_XML)
 				.header(TestConfig.HEADER_PARAM_ORIGIN, TestConfig.ORIGIN_ANTHONYCRUZ)
 				.body(person)
 				.when()
@@ -130,7 +135,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 					.body()
 						.asString();
 		
-		PersonDTO persistedPerson = objectMapper.readValue(content, PersonDTO.class);
+		PersonDTO persistedPerson = xmlMapper.readValue(content, PersonDTO.class);
 		person = persistedPerson;
 		
 		assertNotNull(persistedPerson);
@@ -154,7 +159,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		
 		var content = given()
 				.spec(specification)
-				.contentType(TestConfig.CONTENT_TYPE_JSON)
+				.contentType(TestConfig.CONTENT_TYPE_XML)
+				.accept(TestConfig.CONTENT_TYPE_XML)
 				.header(TestConfig.HEADER_PARAM_ORIGIN, TestConfig.ORIGIN_ANTHONYCRUZ)
 				.pathParam("id", person.getId())
 				.when()
@@ -165,7 +171,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 					.body()
 						.asString();
 		
-		PersonDTO persistedPerson = objectMapper.readValue(content, PersonDTO.class);
+		PersonDTO persistedPerson = xmlMapper.readValue(content, PersonDTO.class);
 		person = persistedPerson;
 		
 		assertNotNull(persistedPerson);
@@ -187,7 +193,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 	public void testDelete() throws JsonMappingException, JsonProcessingException {		
 		given()
 		.spec(specification)
-		.contentType(TestConfig.CONTENT_TYPE_JSON)
+		.contentType(TestConfig.CONTENT_TYPE_XML)
+		.accept(TestConfig.CONTENT_TYPE_XML)
 		.header(TestConfig.HEADER_PARAM_ORIGIN, TestConfig.ORIGIN_ANTHONYCRUZ)
 		.pathParam("id", person.getId())
 		.when()
@@ -203,7 +210,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		
 		var content = given()
 				.spec(specification)
-				.contentType(TestConfig.CONTENT_TYPE_JSON)
+				.contentType(TestConfig.CONTENT_TYPE_XML)
+				.accept(TestConfig.CONTENT_TYPE_XML)
 				.header(TestConfig.HEADER_PARAM_ORIGIN, TestConfig.ORIGIN_ANTHONYCRUZ)
 				.when()
 					.get()
@@ -213,7 +221,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 					.body()
 						.asString();
 		
-		List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
+		List<PersonDTO> people = xmlMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
 
 		assertNotNull(people);
 		assertEquals(21, people.size());
@@ -252,7 +260,8 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		
 		given()
 		.spec(specificationWithoutToken)
-		.contentType(TestConfig.CONTENT_TYPE_JSON)
+		.contentType(TestConfig.CONTENT_TYPE_XML)
+		.accept(TestConfig.CONTENT_TYPE_XML)
 		.when()
 			.get()
 		.then()
