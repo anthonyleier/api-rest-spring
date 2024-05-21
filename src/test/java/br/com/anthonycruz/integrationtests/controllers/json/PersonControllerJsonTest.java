@@ -167,7 +167,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
 
 		assertNotNull(people);
-		assertEquals(21, people.size());
+		assertEquals(22, people.size());
 
 		PersonDTO personTwo = people.get(1);
 		assertEquals(2, personTwo.getId());
