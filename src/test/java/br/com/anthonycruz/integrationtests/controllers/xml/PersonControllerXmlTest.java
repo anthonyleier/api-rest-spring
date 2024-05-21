@@ -37,7 +37,7 @@ public class PersonControllerXmlTest extends AbstractIntegrationTest {
 	private static RequestSpecification specification;
 	private static XmlMapper xmlMapper;
 	private static PersonDTO person;
-	
+
 	private void mockPerson() {
 		person.setFirstName("Richard");
 		person.setLastName("Stallman");

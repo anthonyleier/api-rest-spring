@@ -80,7 +80,7 @@ public class BookController {
 	public BookDTO update(@RequestBody BookDTO bookDTO) {
 		return service.update(bookDTO);
 	}
-
+	
 	@DeleteMapping(value = "/{id}")
 	@Operation(summary = "Delete a book", description = "Deletes a book with a specific ID", tags = {"Books"}, responses = {
 			@ApiResponse(description = "No Content", responseCode = "204", content = @Content),

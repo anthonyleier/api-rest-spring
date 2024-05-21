@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.anthonycruz.controllers.PersonController;
 import br.com.anthonycruz.data.dto.v1.PersonDTO;
@@ -77,6 +78,16 @@ public class PersonService {
 		var savedPersonDTO = DTOMapper.parseObject(savedPerson, PersonDTO.class);
 		savedPersonDTO.add(linkTo(methodOn(PersonController.class).findById(personDTO.getKey())).withSelfRel());
 		return savedPersonDTO;
+	}
+	
+	@Transactional // Na classe ou no método
+	public PersonDTO disableById(Long id) {
+		logger.info("Disabling person with ID " + id);
+		repository.disableById(id);
+		var person = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+		var personDTO = DTOMapper.parseObject(person, PersonDTO.class);
+		personDTO.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+		return personDTO;
 	}
 
 	public void delete(Long id) {
