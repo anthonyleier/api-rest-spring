@@ -1,11 +1,13 @@
 package br.com.anthonycruz.services;
 
-import java.util.List;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,11 +31,12 @@ public class PersonService {
 	@Autowired
 	PersonMapper personMapper;
 
-	public List<PersonDTO> findAll() {
+	public Page<PersonDTO> findAll(Pageable pageable) {
 		logger.info("Searching for all people");
-		List<PersonDTO> personDTOs = DTOMapper.parseListObjects(repository.findAll(), PersonDTO.class);
-		personDTOs.stream().forEach(personDTO -> personDTO.add(linkTo(methodOn(PersonController.class).findById(personDTO.getKey())).withSelfRel()));
-		return personDTOs;
+		var peoplePage = repository.findAll(pageable);
+		Page<PersonDTO> peoplePageDTO = peoplePage.map(p -> DTOMapper.parseObject(p, PersonDTO.class));
+		peoplePageDTO.map(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+		return peoplePageDTO;
 	}
 
 	public PersonDTO findById(Long id) {
