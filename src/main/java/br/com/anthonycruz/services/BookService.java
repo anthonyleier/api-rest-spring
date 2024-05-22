@@ -1,11 +1,17 @@
 package br.com.anthonycruz.services;
 
-import java.util.List;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 
 import br.com.anthonycruz.controllers.BookController;
@@ -21,13 +27,17 @@ public class BookService {
 	private Logger logger = Logger.getLogger(BookService.class.getName());
 	@Autowired
 	BookRepository repository;
+	
+	@Autowired
+	PagedResourcesAssembler<BookDTO> assembler;
 
-	public List<BookDTO> findAll() {
-		logger.info("Searching for all books");
-		var books = repository.findAll();
-		var booksDTO = DTOMapper.parseListObjects(books, BookDTO.class);
-		booksDTO.stream().forEach(bookDTO -> bookDTO.add(linkTo(methodOn(BookController.class).findById(bookDTO.getId())).withSelfRel()));
-		return booksDTO;
+	public PagedModel<EntityModel<BookDTO>> findAll(Pageable pageable) {
+		logger.info("Searching for all book");
+		var bookPage = repository.findAll(pageable);
+		Page<BookDTO> bookPageDTO = bookPage.map(b -> DTOMapper.parseObject(b, BookDTO.class));
+		bookPageDTO.map(b -> b.add(linkTo(methodOn(BookController.class).findById(b.getId())).withSelfRel()));
+		Link link = linkTo(methodOn(BookController.class).findAll(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
+		return assembler.toModel(bookPageDTO, link);
 	}
 
 	public BookDTO findById(Long id) {
