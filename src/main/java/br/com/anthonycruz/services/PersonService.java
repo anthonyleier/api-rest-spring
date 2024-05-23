@@ -46,6 +46,15 @@ public class PersonService {
 		Link link = linkTo(methodOn(PersonController.class).findAll(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
 		return assembler.toModel(peoplePageDTO, link);
 	}
+	
+	public PagedModel<EntityModel<PersonDTO>> findPeopleByName(String firstName, Pageable pageable) {
+		logger.info("Searching for all people with first name like " + firstName);
+		var peoplePage = repository.findPeopleByName(firstName, pageable);
+		Page<PersonDTO> peoplePageDTO = peoplePage.map(p -> DTOMapper.parseObject(p, PersonDTO.class));
+		peoplePageDTO.map(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+		Link link = linkTo(methodOn(PersonController.class).findAll(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
+		return assembler.toModel(peoplePageDTO, link);
+	}
 
 	public PersonDTO findById(Long id) {
 		logger.info("Searching for person with ID " + id);
