@@ -1,6 +1,9 @@
 package br.com.anthonycruz.controllers;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.anthonycruz.data.dto.v1.UploadFileResponseDTO;
 import br.com.anthonycruz.services.FileStorageService;
-import br.com.anthonycruz.util.MediaType;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,18 +30,29 @@ public class FileController {
 	@Autowired
 	private FileStorageService service;
 
-	@PostMapping(value = "/upload")
+	@PostMapping(value = "/uploadFile")
 	@Operation(summary = "Store a file", description = "Stores a file in disc", tags = {"Files"}, responses = {
 			@ApiResponse(description = "Success", responseCode = "200", content = @Content(schema = @Schema(implementation = UploadFileResponseDTO.class))),
 			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
 			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
 			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 			})
-	public UploadFileResponseDTO upload(@RequestParam("file") MultipartFile file) {
+	public UploadFileResponseDTO uploadFile(@RequestParam("file") MultipartFile file) {
 		logger.info("Storing file to disc");
 		var fileName = service.store(file);
 		String fileDownloadURI = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/download/").path(fileName).toUriString();
 		return new UploadFileResponseDTO(fileName, fileDownloadURI, file.getContentType(), file.getSize());
 	}
-
+	
+	@PostMapping(value = "/uploadFiles")
+	@Operation(summary = "Store multiple files", description = "Stores multiple files in disc", tags = {"Files"}, responses = {
+			@ApiResponse(description = "Success", responseCode = "200", content = @Content(schema = @Schema(implementation = UploadFileResponseDTO.class))),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+			})
+	public List<UploadFileResponseDTO> uploadFiles(@RequestParam("files") MultipartFile[] files) {
+		logger.info("Storing files to disc");
+		return Arrays.asList(files).stream().map(file -> uploadFile(file)).collect(Collectors.toList());
+	}
 }
