@@ -33,5 +33,6 @@ springdoc:
     - /auth/**
     - /persons/**
     - /books/**
+    - /files/**
   swagger-ui:
     use-root-path: true

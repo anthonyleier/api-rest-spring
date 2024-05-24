@@ -8,15 +8,15 @@ public class UploadFileResponseDTO implements Serializable {
 	private String fileName;
 	private String fileDownloadURI;
 	private String fileType;
-	private long size;
+	private long fileSize;
 	
 	public UploadFileResponseDTO() {}
 
-	public UploadFileResponseDTO(String fileName, String fileDownloadURI, String fileType, long size) {
+	public UploadFileResponseDTO(String fileName, String fileDownloadURI, String fileType, long fileSize) {
 		this.fileName = fileName;
 		this.fileDownloadURI = fileDownloadURI;
 		this.fileType = fileType;
-		this.size = size;
+		this.fileSize = fileSize;
 	}
 
 	public String getFileName() {
@@ -43,11 +43,11 @@ public class UploadFileResponseDTO implements Serializable {
 		this.fileType = fileType;
 	}
 
-	public long getSize() {
-		return size;
+	public long getFileSize() {
+		return fileSize;
 	}
 
-	public void setSize(long size) {
-		this.size = size;
+	public void setFileSize(long size) {
+		this.fileSize = size;
 	}
 }

@@ -35,7 +35,7 @@ public class FileStorageService {
 			if (fileName.contains("..")) throw new FileStorageException("Sorry, filename contains invalid path sequence " + fileName);
 			Path targetLocation = this.fileStorageLocation.resolve(fileName);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-			return "";
+			return fileName;
 		} catch (Exception e) {
 			throw new FileStorageException("Could not store file " + fileName, e);
 		}

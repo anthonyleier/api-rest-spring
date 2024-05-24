@@ -65,6 +65,7 @@ public class SecurityConfig {
                 		).permitAll()
                         .requestMatchers("/persons/**").authenticated()
                         .requestMatchers("/books/**").authenticated()
+                        .requestMatchers("/files/**").authenticated()
                         .requestMatchers("/users").denyAll()
                 )
                 .cors(cors -> {})
