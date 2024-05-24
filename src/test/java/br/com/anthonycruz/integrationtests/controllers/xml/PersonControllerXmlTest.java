@@ -323,4 +323,32 @@ public class PersonControllerXmlTest extends AbstractIntegrationTest {
 		assertEquals("Male", person1.getGender());
 		assertTrue(person1.getEnabled());
 	}
+	
+	@Test
+	@Order(10)
+	public void testHATEOAS() throws JsonMappingException, JsonProcessingException {		
+		var content = given()
+				.spec(specification)
+				.contentType(TestConfig.CONTENT_TYPE_XML)
+				.accept(TestConfig.CONTENT_TYPE_XML)
+				.queryParams("page", 3, "size", 10, "direction", "asc")
+				.when()
+					.get()
+				.then()
+					.statusCode(200)
+				.extract()
+					.body()
+						.asString();
+		
+		assertTrue(content.contains("<links><rel>self</rel><href>http://localhost:8888/persons/31</href></links>"));
+		assertTrue(content.contains("<links><rel>self</rel><href>http://localhost:8888/persons/32</href></links>"));
+		assertTrue(content.contains("<links><rel>self</rel><href>http://localhost:8888/persons/33</href></links>"));
+		
+		assertTrue(content.contains("<links><rel>first</rel><href>http://localhost:8888/persons?direction=asc&amp;page=0&amp;size=10&amp;sort=id,asc</href></links>"));
+		assertTrue(content.contains("<links><rel>prev</rel><href>http://localhost:8888/persons?direction=asc&amp;page=2&amp;size=10&amp;sort=id,asc</href></links>"));
+		assertTrue(content.contains("<links><rel>self</rel><href>http://localhost:8888/persons?page=3&amp;size=10&amp;direction=asc</href></links>"));
+		assertTrue(content.contains("<links><rel>next</rel><href>http://localhost:8888/persons?direction=asc&amp;page=4&amp;size=10&amp;sort=id,asc</href></links>"));
+		assertTrue(content.contains("<links><rel>last</rel><href>http://localhost:8888/persons?direction=asc&amp;page=102&amp;size=10&amp;sort=id,asc</href></links>"));
+		assertTrue(content.contains("<page><size>10</size><totalElements>1021</totalElements><totalPages>103</totalPages><number>3</number></page>"));
+	}
 }

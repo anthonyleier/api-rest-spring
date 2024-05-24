@@ -1,10 +1,12 @@
 package br.com.anthonycruz.unittests.mockito.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -56,51 +58,13 @@ class PersonServiceTest {
 		assertEquals("Female", result.getGender());
 	}
 
-//	@Test
-//	void testFindAll() {
-//		List<Person> entityList = MockPerson.mockEntityList();
-//
-//		when(repository.findAll()).thenReturn(entityList);
-//		var result = service.findAll();
-//
-//		assertNotNull(result);
-//		assertEquals(14, result.size());
-//		
-//		var entityOne = result.get(1);
-//		assertNotNull(entityOne.getKey());
-//		assertNotNull(entityOne.getLinks());
-//		assertTrue(entityOne.toString().contains("/persons/1"));
-//		assertEquals("Address Test 1", entityOne.getAddress());
-//		assertEquals("First Name Test 1", entityOne.getFirstName());
-//		assertEquals("Last Name Test 1", entityOne.getLastName());
-//		assertEquals("Female", entityOne.getGender());
-//		
-//		var entityFour = result.get(4);
-//		assertNotNull(entityFour.getKey());
-//		assertNotNull(entityFour.getLinks());
-//		assertTrue(entityFour.toString().contains("/persons/4"));
-//		assertEquals("Address Test 4", entityFour.getAddress());
-//		assertEquals("First Name Test 4", entityFour.getFirstName());
-//		assertEquals("Last Name Test 4", entityFour.getLastName());
-//		assertEquals("Male", entityFour.getGender());
-//		
-//		var entitySeven = result.get(7);
-//		assertNotNull(entitySeven.getKey());
-//		assertNotNull(entitySeven.getLinks());
-//		assertTrue(entitySeven.toString().contains("/persons/7"));
-//		assertEquals("Address Test 7", entitySeven.getAddress());
-//		assertEquals("First Name Test 7", entitySeven.getFirstName());
-//		assertEquals("Last Name Test 7", entitySeven.getLastName());
-//		assertEquals("Female", entitySeven.getGender());
-//	}
-
 	@Test
 	void testCreate() {
 		var testID = 2L;
-		
+
 		Person persisted = MockPerson.mockEntity(testID);
 		PersonDTO personDTO = MockPerson.mockDTO(testID);
-	
+
 		when(repository.save(any(Person.class))).thenReturn(persisted);
 		var result = service.create(personDTO);
 
@@ -113,27 +77,27 @@ class PersonServiceTest {
 		assertEquals("Last Name Test 2", result.getLastName());
 		assertEquals("Male", result.getGender());
 	}
-	
+
 	@Test
-	void testCreateWithNullPerson() {	
+	void testCreateWithNullPerson() {
 		Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
 			service.create(null);
 		});
-		
+
 		String expectedMessage = "Its not allowed to persist a null object";
 		String actualMessage = exception.getMessage();
-		
+
 		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
 	@Test
 	void testUpdate() {
 		var testID = 3L;
-		
+
 		Person entity = MockPerson.mockEntity(testID);
 		Person persisted = entity;
 		PersonDTO personDTO = MockPerson.mockDTO(testID);
-		
+
 		when(repository.findById(testID)).thenReturn(Optional.of(entity));
 		when(repository.save(entity)).thenReturn(persisted);
 		var result = service.update(personDTO);
@@ -147,16 +111,16 @@ class PersonServiceTest {
 		assertEquals("Last Name Test 3", result.getLastName());
 		assertEquals("Female", result.getGender());
 	}
-	
+
 	@Test
-	void testUpdateWithNullPerson() {	
+	void testUpdateWithNullPerson() {
 		Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
 			service.update(null);
 		});
-		
+
 		String expectedMessage = "Its not allowed to persist a null object";
 		String actualMessage = exception.getMessage();
-		
+
 		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
