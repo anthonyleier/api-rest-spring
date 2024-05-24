@@ -274,4 +274,44 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 		.then()
 			.statusCode(403);
 	}
+	
+	@Test
+	@Order(9)
+	public void testFindPeopleByName() throws JsonMappingException, JsonProcessingException {		
+		var content = given()
+				.spec(specification)
+				.contentType(TestConfig.CONTENT_TYPE_JSON)
+				.header(TestConfig.HEADER_PARAM_ORIGIN, TestConfig.ORIGIN_ANTHONYCRUZ)
+				.queryParams("page", 1, "size", 2, "direction", "desc")
+				.pathParam("firstName", "ant")
+				.when()
+					.get("/findPeopleByName/{firstName}")
+				.then()
+					.statusCode(200)
+				.extract()
+					.body()
+						.asString();
+		
+		WrapperPersonDTO wrapper = objectMapper.readValue(content, WrapperPersonDTO.class);
+		var people = wrapper.getEmbedded().getPeople();
+
+		assertNotNull(people);
+		assertEquals(2, people.size());
+
+		PersonDTO person0 = people.get(0);
+		assertEquals(310, person0.getId());
+		assertEquals("Iolanthe", person0.getFirstName());
+		assertEquals("Hollyer", person0.getLastName());
+		assertEquals("5 Rutledge Street", person0.getAddress());
+		assertEquals("Female", person0.getGender());
+		assertTrue(person0.getEnabled());
+
+		PersonDTO person1 = people.get(1);
+		assertEquals(1, person1.getId());
+		assertEquals("Anthony", person1.getFirstName());
+		assertEquals("Cruz", person1.getLastName());
+		assertEquals("Caçador/SC", person1.getAddress());
+		assertEquals("Male", person1.getGender());
+		assertTrue(person1.getEnabled());
+	}
 }
