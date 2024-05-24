@@ -21,7 +21,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/persons?page=1&size=5&direction=desc",
+							"raw": "{{baseUrl}}/persons?page=3&size=10&direction=asc",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -31,15 +31,15 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "3"
 								},
 								{
 									"key": "size",
-									"value": "5"
+									"value": "10"
 								},
 								{
 									"key": "direction",
-									"value": "desc"
+									"value": "asc"
 								}
 							]
 						},
@@ -1334,12 +1334,26 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/books",
+							"raw": "{{baseUrl}}/books?page=1&size=10&direction=asc",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "direction",
+									"value": "asc"
+								}
 							]
 						},
 						"description": "Search all books in the database"
