@@ -47,7 +47,7 @@ public class FileController {
 	public UploadFileResponseDTO uploadFile(@RequestParam("file") MultipartFile file) {
 		logger.info("Storing file to disc");
 		var fileName = service.store(file);
-		String fileDownloadURI = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/download/").path(fileName).toUriString();
+		String fileDownloadURI = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/downloadFile/").path(fileName).toUriString();
 		return new UploadFileResponseDTO(fileName, fileDownloadURI, file.getContentType(), file.getSize());
 	}
 	
