@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -16,7 +15,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -25,6 +23,7 @@ import br.com.anthonycruz.config.TestConfig;
 import br.com.anthonycruz.integrationtests.dto.AccountCredentialsDTO;
 import br.com.anthonycruz.integrationtests.dto.BookDTO;
 import br.com.anthonycruz.integrationtests.dto.TokenDTO;
+import br.com.anthonycruz.integrationtests.dto.wrappers.BookPagedModel;
 import br.com.anthonycruz.integrationtests.testcontainers.AbstractIntegrationTest;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -214,6 +213,7 @@ public class BookControllerXmlTest extends AbstractIntegrationTest {
 				.contentType(TestConfig.CONTENT_TYPE_XML)
 				.accept(TestConfig.CONTENT_TYPE_XML)
 				.header(TestConfig.HEADER_PARAM_ORIGIN, TestConfig.ORIGIN_ANTHONYCRUZ)
+				.queryParams("page", 1, "size", 10, "direction", "asc")
 				.when()
 					.get()
 				.then()
@@ -222,31 +222,32 @@ public class BookControllerXmlTest extends AbstractIntegrationTest {
 					.body()
 						.asString();
 		
-		List<BookDTO> people = xmlMapper.readValue(content, new TypeReference<List<BookDTO>>() {});
+		BookPagedModel wrapper = xmlMapper.readValue(content, BookPagedModel.class);
+		var books = wrapper.getContent();
 
-		assertNotNull(people);
-		assertEquals(15, people.size());
+		assertNotNull(books);
+		assertEquals(5, books.size());
 
-		BookDTO bookThree = people.get(2);
-		assertEquals(3, bookThree.getId());
-		assertEquals("Clean Code", bookThree.getTitle());
-		assertEquals("Robert C. Martin", bookThree.getAuthor());
-		assertEquals(77.0, bookThree.getPrice());
-		assertNotNull(bookThree.getLaunchDate());
+		BookDTO book0 = books.get(0);
+		assertEquals(11, book0.getId());
+		assertEquals("Engenharia de Software: uma abordagem profissional", book0.getTitle());
+		assertEquals("Roger S. Pressman", book0.getAuthor());
+		assertEquals(56.0, book0.getPrice());
+		assertNotNull(book0.getLaunchDate());
 
-		BookDTO bookSix = people.get(5);
-		assertEquals(6, bookSix.getId());
-		assertEquals("Refactoring", bookSix.getTitle());
-		assertEquals("Martin Fowler e Kent Beck", bookSix.getAuthor());
-		assertEquals(88.0, bookSix.getPrice());
-		assertNotNull(bookSix.getLaunchDate());
+		BookDTO book1 = books.get(1);
+		assertEquals(12, book1.getId());
+		assertEquals("Big Data: como extrair volume, variedade, velocidade e valor da avalanche de informação cotidiana", book1.getTitle());
+		assertEquals("Viktor Mayer-Schonberger e Kenneth Kukier", book1.getAuthor());
+		assertEquals(54.0, book1.getPrice());
+		assertNotNull(book1.getLaunchDate());
 
-		BookDTO bookEight = people.get(7);
-		assertEquals(8, bookEight.getId());
-		assertEquals("Domain Driven Design", bookEight.getTitle());
-		assertEquals("Eric Evans", bookEight.getAuthor());
-		assertEquals(92.0, bookEight.getPrice());
-		assertNotNull(bookEight.getLaunchDate());
+		BookDTO book2 = books.get(2);
+		assertEquals(13, book2.getId());
+		assertEquals("O verdadeiro valor de TI", book2.getTitle());
+		assertEquals("Richard Hunter e George Westerman", book2.getAuthor());
+		assertEquals(95.0, book2.getPrice());
+		assertNotNull(book2.getLaunchDate());
 	}
 	
 	@Test

@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -16,7 +14,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +22,7 @@ import br.com.anthonycruz.config.TestConfig;
 import br.com.anthonycruz.integrationtests.dto.AccountCredentialsDTO;
 import br.com.anthonycruz.integrationtests.dto.PersonDTO;
 import br.com.anthonycruz.integrationtests.dto.TokenDTO;
+import br.com.anthonycruz.integrationtests.dto.wrappers.WrapperPersonDTO;
 import br.com.anthonycruz.integrationtests.testcontainers.AbstractIntegrationTest;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -218,6 +216,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 				.spec(specification)
 				.contentType(TestConfig.CONTENT_TYPE_JSON)
 				.header(TestConfig.HEADER_PARAM_ORIGIN, TestConfig.ORIGIN_ANTHONYCRUZ)
+				.queryParams("page", 3, "size", 10, "direction", "asc")
 				.when()
 					.get()
 				.then()
@@ -226,34 +225,35 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 					.body()
 						.asString();
 		
-		List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {});
+		WrapperPersonDTO wrapper = objectMapper.readValue(content, WrapperPersonDTO.class);
+		var people = wrapper.getEmbedded().getPeople();
 
 		assertNotNull(people);
-		assertTrue(people.size() >= 20);
+		assertEquals(10, people.size());
 
-		PersonDTO personTwo = people.get(1);
-		assertEquals(2, personTwo.getId());
-		assertEquals("Sherlock", personTwo.getFirstName());
-		assertEquals("Holmes", personTwo.getLastName());
-		assertEquals("221B Baker Street", personTwo.getAddress());
-		assertEquals("M", personTwo.getGender());
-		assertTrue(personTwo.getEnabled());
+		PersonDTO person0 = people.get(0);
+		assertEquals(31, person0.getId());
+		assertEquals("L;urette", person0.getFirstName());
+		assertEquals("Jayne", person0.getLastName());
+		assertEquals("8762 Birchwood Point", person0.getAddress());
+		assertEquals("Female", person0.getGender());
+		assertTrue(person0.getEnabled());
 
-		PersonDTO personFour = people.get(3);
-		assertEquals(4, personFour.getId());
-		assertEquals("Harry", personFour.getFirstName());
-		assertEquals("Potter", personFour.getLastName());
-		assertEquals("4 Privet Drive", personFour.getAddress());
-		assertEquals("M", personFour.getGender());
-		assertTrue(personFour.getEnabled());
+		PersonDTO person1 = people.get(1);
+		assertEquals(32, person1.getId());
+		assertEquals("Jackie", person1.getFirstName());
+		assertEquals("Devanny", person1.getLastName());
+		assertEquals("54 Bartelt Crossing", person1.getAddress());
+		assertEquals("Male", person1.getGender());
+		assertTrue(person1.getEnabled());
 
-		PersonDTO personSixteen = people.get(15);
-		assertEquals(16, personSixteen.getId());
-		assertEquals("SpongeBob", personSixteen.getFirstName());
-		assertEquals("SquarePants", personSixteen.getLastName());
-		assertEquals("Bikini Bottom", personSixteen.getAddress());
-		assertEquals("M", personSixteen.getGender());
-		assertTrue(personSixteen.getEnabled());
+		PersonDTO person2 = people.get(2);
+		assertEquals(33, person2.getId());
+		assertEquals("Bastian", person2.getFirstName());
+		assertEquals("Vesty", person2.getLastName());
+		assertEquals("2 Bunting Terrace", person2.getAddress());
+		assertEquals("Male", person2.getGender());
+		assertFalse(person2.getEnabled());
 	}
 	
 	@Test
