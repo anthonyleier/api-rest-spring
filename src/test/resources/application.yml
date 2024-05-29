@@ -5,7 +5,7 @@ cors:
   originPatterns: http://localhost:3000,http://localhost:8080,https://anthonycruz.com.br
 
 file:
-  upload-dir: /upload-spring-api
+  upload-dir: /home/runner/work/api-rest-spring/upload
 
 security:
   jwt:
