@@ -16,9 +16,12 @@ security:
 spring:
   datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/api-rest-spring?useTimezone=true&serverTimezone=UTC
+      # url: jdbc:mysql://localhost:3306/api-rest-spring?useTimezone=true&serverTimezone=UTC
+      # username: root
+      # password: root
+      url: jdbc:mysql://api-rest-spring.c3uioyue80xs.us-east-1.rds.amazonaws.com:3306/api_database?useTimezone=true&serverTimezone=UTC
       username: root
-      password: root
+      password: rootroot
   jpa:
     open-in-view: false
     show-sql: false

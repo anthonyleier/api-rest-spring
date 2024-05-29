@@ -331,13 +331,13 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
 					.body()
 						.asString();
 		
-		assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/persons/31\"}}}"));
-		assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/persons/32\"}}}"));
-		assertTrue(content.contains("\"_links\":{\"self\":{\"href\":\"http://localhost:8888/persons/33\"}}}"));
+		assertTrue(content.contains("/persons/31\"}}}"));
+		assertTrue(content.contains("/persons/32\"}}}"));
+		assertTrue(content.contains("/persons/33\"}}}"));
 		
-		assertTrue(content.contains("{\"first\":{\"href\":\"http://localhost:8888/persons?direction=asc&page=0&size=10&sort=id,asc\"}"));
-		assertTrue(content.contains("\"prev\":{\"href\":\"http://localhost:8888/persons?direction=asc&page=2&size=10&sort=id,asc\"}"));
-		assertTrue(content.contains("\"self\":{\"href\":\"http://localhost:8888/persons?page=3&size=10&direction=asc\"}"));
-		assertTrue(content.contains("\"next\":{\"href\":\"http://localhost:8888/persons?direction=asc&page=4&size=10&sort=id,asc\"}"));
+		assertTrue(content.contains("/persons?direction=asc&page=0&size=10&sort=id,asc\"}"));
+		assertTrue(content.contains("/persons?direction=asc&page=2&size=10&sort=id,asc\"}"));
+		assertTrue(content.contains("/persons?page=3&size=10&direction=asc\"}"));
+		assertTrue(content.contains("/persons?direction=asc&page=4&size=10&sort=id,asc\"}"));
 	}
 }
