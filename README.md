@@ -47,5 +47,5 @@ Por fim, com todo o processo finalizado, foi possível acessar o endpoint refere
 ![Aplicação na AWS mostrando o Swagger](docs/AWS%20-%20Swagger.png)
 
 ## Frontend
-Como anexo a este projeto, também foi desenvolvido um frontend em React que consome essa aplicação, que pode ser acessado em [anthonyleier/frontend](https://github.com/anthonyleier/frontent).
+Como anexo a este projeto, também foi desenvolvido um frontend em React que consome essa aplicação, que pode ser acessado no diretório [frontend](frontend). Como é apenas um anexo de um client para esta aplicação, e não é o foco do repositório, decidi manter esse projeto em uma subpasta.
 ![Frontend para a aplicação](docs/frontend.png)
