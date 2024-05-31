@@ -4,7 +4,9 @@
 
 O projeto foi desenvolvido na realização do curso [REST API's](https://www.udemy.com/course/restful-apis-do-0-a-nuvem-com-springboot-e-docker/) do [@leandrocgsi](https://github.com/leandrocgsi). Para isto, foi utilizado o Java 21 com Spring Boot na versão 3.2.5.
 
-Durante o desenvolvimento foi abordado diversos conceitos fundamentais do REST, Design Patterns, Versionamento de APIs, Tratamento de Exceções, ModelMapper, Migrations com Flyway, Content Negotiation para JSON e XML, HATEOAS. Aplicando boas práticas, como a documentação em Swagger, configuração de CORS, segurança com autenticação e autorização através de JWT. Foi possível também abordar outros conceitos como trabalhar com Upload e Download de arquivos através de um endpoint. Também foram criados testes automatizados com JUnit, Mockito, TestContainers para o MySQL e Rest Assured.
+Durante o desenvolvimento foi abordado diversos conceitos fundamentais do REST, Design Patterns, Versionamento de APIs, Tratamento de Exceções, ModelMapper, Migrations com Flyway, Content Negotiation para JSON e XML, HATEOAS. Aplicando boas práticas, como a documentação em Swagger, configuração de CORS, segurança com autenticação e autorização através de JWT.
+
+Foi possível também abordar outros conceitos como trabalhar com Upload e Download de arquivos através de um endpoint. Também foram criados testes automatizados com JUnit, Mockito, TestContainers para o MySQL e Rest Assured. Como forma de teste manual, também é possível consultar a aplicação com base nos exemplos disponibilizados no diretório [postman](postman) que pode ser diretamente importados como collections e enviroments dentro do Postman.
 
 Por fim, a aplicação foi dockerizada, através de Dockerfile com possibilidade de Docker Compose para o banco local e implementada na AWS, utilizando recursos como ECR e ECS. Por razões financeiras, a aplicação foi removida da AWS, mas toda a documentação desse processo pode ser encontrada abaixo.
 
