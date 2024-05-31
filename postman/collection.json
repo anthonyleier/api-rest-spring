@@ -340,7 +340,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 21,\n    \"firstName\": \"Anthony2\",\n    \"lastName\": \"Cruz2\",\n    \"gender\": \"Male\",\n    \"address\": \"Caçador/SC\"\n}",
+							"raw": "{\n    \"id\": 1021,\n    \"firstName\": \"Anthony2\",\n    \"lastName\": \"Cruz2\",\n    \"gender\": \"Male\",\n    \"address\": \"Caçador/SC\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -568,7 +568,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"firstName\": \"Anthony\",\n  \"lastName\": \"Cruz\",\n  \"gender\": \"Male\",\n  \"address\": \"Caçador/SC\"\n}",
+							"raw": "{\n  \"firstName\": \"Anthony\",\n  \"lastName\": \"Cruz\",\n  \"gender\": \"Male\",\n  \"address\": \"Caçador/SC\",\n  \"enabled\": true\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -758,13 +758,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/persons/3",
+							"raw": "{{baseUrl}}/persons/1021",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"persons",
-								"3"
+								"1021"
 							]
 						},
 						"description": "Searches for a person with a specific ID"
@@ -961,13 +961,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/persons/3",
+							"raw": "{{baseUrl}}/persons/1021",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"persons",
-								"3"
+								"1021"
 							]
 						},
 						"description": "Searches for a person with a specific ID"
@@ -1164,13 +1164,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/persons/22",
+							"raw": "{{baseUrl}}/persons/1021",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"persons",
-								"22"
+								"1021"
 							]
 						},
 						"description": "Deletes a person with a specific ID"
@@ -1493,7 +1493,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 16,\n    \"title\": \"Working effectively with legacy code\",\n    \"author\": \"Michael C. Feathers\",\n    \"price\": 55.0,\n    \"launchDate\": \"2017-11-29T00:00:00.000+00:00\"\n}",
+							"raw": "{\n    \"id\": 16,\n    \"title\": \"Working effectively with legacy code2\",\n    \"author\": \"Michael C. Feathers\",\n    \"price\": 55.0,\n    \"launchDate\": \"2017-11-29T00:00:00.000+00:00\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -1911,13 +1911,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/books/2",
+							"raw": "{{baseUrl}}/books/16",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books",
-								"2"
+								"16"
 							]
 						},
 						"description": "Searches for a book with a specific ID"
@@ -2114,13 +2114,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/books/2",
+							"raw": "{{baseUrl}}/books/16",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books",
-								"2"
+								"16"
 							]
 						},
 						"description": "Deletes a book with a specific ID"
@@ -2468,6 +2468,10 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{accessToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
 							}
 						],
 						"body": {
@@ -2663,14 +2667,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/files/downloadFile/luiz.jpg",
+							"raw": "{{baseUrl}}/files/downloadFile/xp.jpg",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"files",
 								"downloadFile",
-								"luiz.jpg"
+								"xp.jpg"
 							]
 						},
 						"description": "Adds a new person by passing a JSON, XML, or YAML representation"
@@ -2852,15 +2856,7 @@
 									"key": "files",
 									"type": "file",
 									"src": [
-										"/C:/Users/anthony.cruz/Pictures/xp.jpg",
-										"/C:/Users/anthony.cruz/Pictures/alfa.png",
-										"/C:/Users/anthony.cruz/Pictures/anthony.png",
-										"/C:/Users/anthony.cruz/Pictures/anthony2.jpg",
 										"/C:/Users/anthony.cruz/Pictures/anthony3.jpg",
-										"/C:/Users/anthony.cruz/Pictures/anthonyalfa.png",
-										"/C:/Users/anthony.cruz/Pictures/luiz.jpg",
-										"/C:/Users/anthony.cruz/Pictures/onefloat.jpg",
-										"/C:/Users/anthony.cruz/Pictures/totvs.jpg",
 										"/C:/Users/anthony.cruz/Pictures/xp.jpg"
 									]
 								}
