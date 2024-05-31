@@ -12,7 +12,7 @@ services:
     volumes:
       - data:/var/lib/mysql
 
-  api-rest-spring:
+  app:
     build:
       context: .
     environment:
