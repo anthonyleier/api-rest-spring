@@ -6,7 +6,7 @@ O projeto foi desenvolvido na realização do curso [REST API's](https://www.ude
 
 Durante o desenvolvimento foi abordado diversos conceitos fundamentais do REST, Design Patterns, Versionamento de APIs, Tratamento de Exceções, ModelMapper, Migrations com Flyway, Content Negotiation para JSON e XML, HATEOAS. Aplicando boas práticas, como a documentação em Swagger, configuração de CORS, segurança com autenticação e autorização através de JWT. Foi possível também abordar outros conceitos como trabalhar com Upload e Download de arquivos através de um endpoint. Também foram criados testes automatizados com JUnit, Mockito, TestContainers para o MySQL e Rest Assured.
 
-Por fim, a aplicação foi dockerizada, através de Dockerfile e implementada via Docker Compose e implementada na AWS, utilizando recursos como ECR e ECS. Por razões financeiras, a aplicação foi removida da AWS, mas toda a documentação desse processo pode ser encontrada abaixo.
+Por fim, a aplicação foi dockerizada, através de Dockerfile com possibilidade de Docker Compose para o banco local e implementada na AWS, utilizando recursos como ECR e ECS. Por razões financeiras, a aplicação foi removida da AWS, mas toda a documentação desse processo pode ser encontrada abaixo.
 
 ## CI/CD
 Foi criada uma esteira de CI/CD com a utilização do Github Actions para implantação na AWS, que pode ser conferida no arquivo [ci.yml](.github/workflows/ci.yml).
