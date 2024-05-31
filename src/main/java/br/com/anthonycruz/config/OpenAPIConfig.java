@@ -14,7 +14,7 @@ public class OpenAPIConfig {
 		return new OpenAPI()
 				.info(
 						new Info()
-						.title("RESTful API com Java/Spring Boot")
+						.title("RESTful API com Java/Spring Boot na AWS")
 						.version("v1")
 						.description("Aprendizado de Spring Boot com API REST e padrões de projeto")
 						.termsOfService("https://developers.google.com/terms")
