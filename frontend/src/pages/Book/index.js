@@ -22,6 +22,14 @@ export default function Book() {
         navigate("/");
     }
 
+    function editBook(id) {
+        try {
+            navigate(`/books/new/${id}`);
+        } catch (error) {
+            alert("Edit failed, try again");
+        }
+    }
+
     async function deleteBook(id) {
         try {
             await api.delete(`/books/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } });
@@ -37,7 +45,7 @@ export default function Book() {
                 <span>
                     Welcome, <strong>{username}</strong>!
                 </span>
-                <Link className="button" to="/books/new">
+                <Link className="button" to="/books/new/0">
                     Add new book
                 </Link>
                 <button type="button" onClick={logout}>
@@ -59,7 +67,7 @@ export default function Book() {
                             <strong>Release Date:</strong>
                             <p>{Intl.DateTimeFormat("pt-BR").format(new Date(book.launchDate))}</p>
 
-                            <button type="button">
+                            <button type="button" onClick={() => editBook(book.id)}>
                                 <FiEdit size={20} color="#3D37E6" />
                             </button>
                             <button type="button" onClick={() => deleteBook(book.id)}>
