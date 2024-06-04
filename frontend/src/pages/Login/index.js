@@ -23,7 +23,7 @@ export default function Login() {
             localStorage.setItem("accessToken", response.data.accessToken);
             navigate('/books')
         } catch (error) {
-            alert("Login failed! Try again!");
+            alert("Login failed, try again");
         }
     }
 

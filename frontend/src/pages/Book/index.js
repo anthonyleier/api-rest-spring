@@ -12,10 +12,19 @@ export default function Book() {
     const accessToken = localStorage.getItem("accessToken");
 
     useEffect(() => {
-        api.get("/books", { headers: { Authorization: `Bearer ${accessToken}` } }).then((response) => {
+        api.get("/books", { headers: { Authorization: `Bearer ${accessToken}` }, params: { page: 1, size: 4, direction: "asc" } }).then((response) => {
             setBooks(response.data._embedded.bookDTOList);
         });
     });
+
+    async function deleteBook(id) {
+        try {
+            await api.delete(`/books/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } });
+            setBooks(books.filter((book) => book.id !== id));
+        } catch (error) {
+            alert("Delete failed, try again");
+        }
+    }
 
     return (
         <div className="book-container">
@@ -48,7 +57,7 @@ export default function Book() {
                             <button type="button">
                                 <FiEdit size={20} color="#3D37E6" />
                             </button>
-                            <button type="button">
+                            <button type="button" onClick={() => deleteBook(book.id)}>
                                 <FiTrash2 size={20} color="#3D37E6" />
                             </button>
                         </li>
