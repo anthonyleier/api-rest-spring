@@ -15,7 +15,7 @@ export default function Book() {
         api.get("/books", { headers: { Authorization: `Bearer ${accessToken}` }, params: { page: 1, size: 4, direction: "asc" } }).then((response) => {
             setBooks(response.data._embedded.bookDTOList);
         });
-    });
+    }, [accessToken]);
 
     function logout() {
         localStorage.clear();

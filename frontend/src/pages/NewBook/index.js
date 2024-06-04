@@ -6,7 +6,6 @@ import "./styles.css";
 import api from "../../services/api";
 
 export default function NewBook() {
-    const [id, setId] = useState(null);
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [price, setPrice] = useState("");
@@ -23,7 +22,6 @@ export default function NewBook() {
         async function loadBook() {
             try {
                 const response = await api.get(`/books/${bookId}`, { headers: { Authorization: `Bearer ${accessToken}` } });
-                setId(response.data.id);
                 setTitle(response.data.title);
                 setAuthor(response.data.author);
                 setPrice(response.data.price);
@@ -35,7 +33,7 @@ export default function NewBook() {
         }
     }, [bookId, accessToken, navigate]);
 
-    async function createBook(event) {
+    async function saveOrUpdateBook(event) {
         event.preventDefault();
 
         const data = {
@@ -46,8 +44,14 @@ export default function NewBook() {
         };
 
         try {
-            await api.post("/books", data, { headers: { Authorization: `Bearer ${accessToken}` } });
-            navigate("/books");
+            if (bookId === "0") {
+                await api.post("/books", data, { headers: { Authorization: `Bearer ${accessToken}` } });
+                navigate("/books");
+            } else {
+                data.id = bookId;
+                await api.put("/books", data, { headers: { Authorization: `Bearer ${accessToken}` } });
+                navigate("/books");
+            }
         } catch (error) {
             alert("Erro while recording book, try again");
         }
@@ -57,21 +61,21 @@ export default function NewBook() {
         <div className="new-book-container">
             <div className="content">
                 <section className="form">
-                    <h1>Add new book</h1>
-                    <p>Enter the book information and click on 'Add'!</p>
+                    <h1>{bookId === "0" ? "Add new" : "Update"} book</h1>
+                    <p>Enter the book information and click on '{bookId === "0" ? "Add" : "Update"}'!</p>
 
                     <Link className="back-link" to="/books">
                         <FiArrowLeft size={16} color="#737380"></FiArrowLeft>
                         HOME
                     </Link>
                 </section>
-                <form onSubmit={createBook}>
+                <form onSubmit={saveOrUpdateBook}>
                     <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
                     <input placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)} />
                     <input placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
                     <input type="date" value={launchDate} onChange={(e) => setLaunchDate(e.target.value)} />
                     <button className="button" type="submit">
-                        Add
+                        {bookId === "0" ? "Add" : "Update"}
                     </button>
                 </form>
             </div>
