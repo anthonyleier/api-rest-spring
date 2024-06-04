@@ -17,6 +17,11 @@ export default function Book() {
         });
     });
 
+    function logout() {
+        localStorage.clear();
+        navigate("/");
+    }
+
     async function deleteBook(id) {
         try {
             await api.delete(`/books/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } });
@@ -35,7 +40,7 @@ export default function Book() {
                 <Link className="button" to="/books/new">
                     Add new book
                 </Link>
-                <button type="button">
+                <button type="button" onClick={logout}>
                     <FiPower size={18} color="#3D37E6" />
                 </button>
             </header>
@@ -44,7 +49,7 @@ export default function Book() {
             <ul>
                 {books.map((book) => {
                     return (
-                        <li>
+                        <li key={book.id}>
                             <strong>Title:</strong>
                             <p>{book.title}</p>
                             <strong>Author:</strong>
