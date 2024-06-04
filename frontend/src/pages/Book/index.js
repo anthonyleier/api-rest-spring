@@ -1,14 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FiPower, FiEdit, FiTrash2 } from "react-icons/fi";
+
 import "./styles.css";
+import api from "../../services/api";
 
 export default function Book() {
+    const navigate = useNavigate();
+    const [books, setBooks] = useState([]);
+    const username = localStorage.getItem("username");
+    const accessToken = localStorage.getItem("accessToken");
+
+    useEffect(() => {
+        api.get("/books", { headers: { Authorization: `Bearer ${accessToken}` } }).then((response) => {
+            setBooks(response.data._embedded.bookDTOList);
+        });
+    });
+
     return (
         <div className="book-container">
             <header>
                 <span>
-                    Welcome, <strong>Anthony</strong>!
+                    Welcome, <strong>{username}</strong>!
                 </span>
                 <Link className="button" to="/books/new">
                     Add new book
@@ -20,91 +33,27 @@ export default function Book() {
 
             <h1>Registered Books</h1>
             <ul>
-                <li>
-                    <strong>Title:</strong>
-                    <p>Docker Deep Dive</p>
-                    <strong>Author:</strong>
-                    <p>Nigel Poulton</p>
-                    <strong>Price:</strong>
-                    <p>R$ 47,90</p>
-                    <strong>Release Date:</strong>
-                    <p>12/07/2017</p>
+                {books.map((book) => {
+                    return (
+                        <li>
+                            <strong>Title:</strong>
+                            <p>{book.title}</p>
+                            <strong>Author:</strong>
+                            <p>{book.author}</p>
+                            <strong>Price:</strong>
+                            <p>{Intl.NumberFormat("pt-BR", { style: "currency", currency: "brl" }).format(book.price)}</p>
+                            <strong>Release Date:</strong>
+                            <p>{Intl.DateTimeFormat("pt-BR").format(new Date(book.launchDate))}</p>
 
-                    <button type="button">
-                        <FiEdit size={20} color="#3D37E6" />
-                    </button>
-                    <button type="button">
-                        <FiTrash2 size={20} color="#3D37E6" />
-                    </button>
-                </li>
-                <li>
-                    <strong>Title:</strong>
-                    <p>Docker Deep Dive</p>
-                    <strong>Author:</strong>
-                    <p>Nigel Poulton</p>
-                    <strong>Price:</strong>
-                    <p>R$ 47,90</p>
-                    <strong>Release Date:</strong>
-                    <p>12/07/2017</p>
-
-                    <button type="button">
-                        <FiEdit size={20} color="#3D37E6" />
-                    </button>
-                    <button type="button">
-                        <FiTrash2 size={20} color="#3D37E6" />
-                    </button>
-                </li>
-                <li>
-                    <strong>Title:</strong>
-                    <p>Docker Deep Dive</p>
-                    <strong>Author:</strong>
-                    <p>Nigel Poulton</p>
-                    <strong>Price:</strong>
-                    <p>R$ 47,90</p>
-                    <strong>Release Date:</strong>
-                    <p>12/07/2017</p>
-
-                    <button type="button">
-                        <FiEdit size={20} color="#3D37E6" />
-                    </button>
-                    <button type="button">
-                        <FiTrash2 size={20} color="#3D37E6" />
-                    </button>
-                </li>
-                <li>
-                    <strong>Title:</strong>
-                    <p>Docker Deep Dive</p>
-                    <strong>Author:</strong>
-                    <p>Nigel Poulton</p>
-                    <strong>Price:</strong>
-                    <p>R$ 47,90</p>
-                    <strong>Release Date:</strong>
-                    <p>12/07/2017</p>
-
-                    <button type="button">
-                        <FiEdit size={20} color="#3D37E6" />
-                    </button>
-                    <button type="button">
-                        <FiTrash2 size={20} color="#3D37E6" />
-                    </button>
-                </li>
-                <li>
-                    <strong>Title:</strong>
-                    <p>Docker Deep Dive</p>
-                    <strong>Author:</strong>
-                    <p>Nigel Poulton</p>
-                    <strong>Price:</strong>
-                    <p>R$ 47,90</p>
-                    <strong>Release Date:</strong>
-                    <p>12/07/2017</p>
-
-                    <button type="button">
-                        <FiEdit size={20} color="#3D37E6" />
-                    </button>
-                    <button type="button">
-                        <FiTrash2 size={20} color="#3D37E6" />
-                    </button>
-                </li>
+                            <button type="button">
+                                <FiEdit size={20} color="#3D37E6" />
+                            </button>
+                            <button type="button">
+                                <FiTrash2 size={20} color="#3D37E6" />
+                            </button>
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );
