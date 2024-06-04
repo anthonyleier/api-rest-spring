@@ -7,15 +7,14 @@ import api from "../../services/api";
 
 export default function Book() {
     const navigate = useNavigate();
+    const [page, setPage] = useState(1);
     const [books, setBooks] = useState([]);
     const username = localStorage.getItem("username");
     const accessToken = localStorage.getItem("accessToken");
 
     useEffect(() => {
-        api.get("/books", { headers: { Authorization: `Bearer ${accessToken}` }, params: { page: 1, size: 4, direction: "asc" } }).then((response) => {
-            setBooks(response.data._embedded.bookDTOList);
-        });
-    }, [accessToken]);
+        fetchMoreBooks();
+    }, []);
 
     function logout() {
         localStorage.clear();
@@ -28,6 +27,13 @@ export default function Book() {
         } catch (error) {
             alert("Edit failed, try again");
         }
+    }
+
+    async function fetchMoreBooks() {
+        const response = await api.get("/books", { headers: { Authorization: `Bearer ${accessToken}` }, params: { page: page, size: 3, direction: "asc" } });
+        console.log(page, response.data);
+        setBooks([...books, ...response.data._embedded.bookDTOList]);
+        setPage(page + 1);
     }
 
     async function deleteBook(id) {
@@ -77,6 +83,9 @@ export default function Book() {
                     );
                 })}
             </ul>
+            <button className="button" onClick={fetchMoreBooks} type="button">
+                Load more
+            </button>
         </div>
     );
 }
