@@ -64,7 +64,7 @@ export default function Book() {
                             <p>{book.author}</p>
                             <strong>Price:</strong>
                             <p>{Intl.NumberFormat("pt-BR", { style: "currency", currency: "brl" }).format(book.price)}</p>
-                            <strong>Release Date:</strong>
+                            <strong>Launch Date:</strong>
                             <p>{Intl.DateTimeFormat("pt-BR").format(new Date(book.launchDate))}</p>
 
                             <button type="button" onClick={() => editBook(book.id)}>
