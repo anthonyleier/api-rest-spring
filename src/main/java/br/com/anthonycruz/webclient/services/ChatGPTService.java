@@ -23,12 +23,14 @@ public class ChatGPTService {
 	@Autowired
 	private WebClient webClient;
 
-	public Object chat(String prompt) {
-		logger.info("Starting chat with prompt");
+	public String chat(String prompt) {
+		logger.info("Starting chat with prompt " + prompt);
 		ChatGPTRequest request = new ChatGPTRequest(model, prompt);
 		logger.info("Sending prompt");
 		Mono<ChatGPTResponse> responseMono = webClient.post().uri(url).bodyValue(request).retrieve().bodyToMono(ChatGPTResponse.class);
 		ChatGPTResponse response = responseMono.block();
-		return response.getChoices().get(0).getMessage().getContent();
+		var responseContent = response.getChoices().get(0).getMessage().getContent();
+		logger.info("Response from ChatGPT " + responseContent);
+		return responseContent;
 	}
 }
