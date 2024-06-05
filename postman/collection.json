@@ -3035,6 +3035,40 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "chatgpt",
+			"item": [
+				{
+					"name": "Send prompt",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/gpt/chat?prompt=Faça um código em Python que calcule o IMC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"gpt",
+								"chat"
+							],
+							"query": [
+								{
+									"key": "prompt",
+									"value": "Faça um código em Python que calcule o IMC"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [

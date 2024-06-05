@@ -18,5 +18,20 @@
     "name": "file.upload-dir",
     "type": "java.lang.String",
     "description": "Folder for storage files"
+  },
+  {
+    "name": "openai.model",
+    "type": "java.lang.String",
+    "description": "OpenAI Model for chat"
+  },
+  {
+    "name": "openai.api.key",
+    "type": "java.lang.String",
+    "description": "Secret API Key for OpenAI API"
+  },
+  {
+    "name": "openai.api.url",
+    "type": "java.lang.String",
+    "description": "Default URL for OpenAI API"
   }
 ]}
