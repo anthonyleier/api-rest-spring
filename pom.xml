@@ -144,7 +144,7 @@
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
 					<url>
-						jdbc:mysql://localhost:3306/api-rest-spring?useTimezone=true&amp;serverTimezone=UTC&amp;useSSL=false</url>
+						jdbc:mysql://localhost:3306/api_database?useTimezone=true&amp;serverTimezone=UTC&amp;useSSL=false</url>
 					<user>root</user>
 					<password>root</password>
 				</configuration>
